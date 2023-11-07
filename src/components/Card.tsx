@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 export type CardProps = PropsWithChildren<{}>;
 

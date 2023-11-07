@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useContentFieldExtension } from "./WithFieldExtension";
 import BynderImageField from "./BynderImageField";
-import _ from "lodash";
 
 function BynderExtension() {
   const sdk = useContentFieldExtension();
