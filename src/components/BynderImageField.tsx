@@ -5,7 +5,6 @@ import ImageCard from "./ImageCard";
 import ChooserActions from "./ChooserActions";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "./DeleteIcon";
-import { useContentFieldExtension } from "./WithFieldExtension";
 
 export type ImageFieldProps = {
   value?: any;

@@ -4,21 +4,16 @@
   "private": true,
   "dependencies": {
     "@datadog/browser-rum": "^4.45.0",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.0",
     "@mui/material": "^5.14.0",
-    "@mui/styles": "^5.14.7",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "dc-extensions-sdk": "^2.2.0",
-    "openai": "^4.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4",
-    "web-vitals": "^3.4.0"
+    "typescript": "^4"
   },
   "scripts": {
     "start": "react-scripts start",
