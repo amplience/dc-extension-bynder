@@ -10,7 +10,9 @@ const Root = styled("div")(({ theme }: any) => ({
   ...theme.typography.subtitle1,
   fontWeight: theme.typography.fontWeightBold,
   marginBottom: 35,
-  padding: "10px 10px 0",
+  backgroundColor: "#fff",
+  opacity: 0.7,
+  padding: "5px 15px 5px 15px",
 }));
 
 function CardHeader(props: CardHeaderProps) {
