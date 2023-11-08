@@ -23,7 +23,7 @@ function BynderExtension() {
       handleChange(assets[0]);
       setOpenDialog(false);
     },
-  }
+  };
 
   const handleChange = (newValue) => {
     setValue(newValue);
