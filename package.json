@@ -2,6 +2,7 @@
   "name": "dc-extension-bynder",
   "version": "0.0.1",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@datadog/browser-rum": "^4.45.0",
     "@mui/icons-material": "^5.14.0",
