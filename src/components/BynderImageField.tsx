@@ -48,7 +48,7 @@ function BynderImageField(props: ImageFieldProps) {
   };
 
   return (
-    <Chooser {...other}>
+    <Chooser {...other} title={value?.name}>
       {hasValue && (
         <ImageCard
           src={`${value?.files?.webImage?.url || value?.files?.thumbnail?.url || value?.originalUrl}`}
