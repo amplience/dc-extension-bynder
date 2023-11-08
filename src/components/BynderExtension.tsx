@@ -23,6 +23,8 @@ function BynderExtension() {
       handleChange(assets[0]);
       setOpenDialog(false);
     },
+    onLogout: undefined,
+    authentication: undefined,
   };
 
   const handleChange = (newValue) => {
