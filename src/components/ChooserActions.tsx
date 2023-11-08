@@ -14,16 +14,16 @@ const Root = styled("div")(({ populated }: any) => ({
   right: 0,
 
   display: "flex",
-  "flex-direction": "row",
-  "align-items": "center",
-  "align-content": "center",
-  "justify-content": "center",
+  flexDirection: "row",
+  alignItems: "center",
+  alignContent: "center",
+  justifyContent: "center",
 
   ...(populated
     ? {
         fill: "#fff",
         "&:hover": {
-          "background-color": "rgba(41,51,63,.8)",
+          backgroundColor: "rgba(41,51,63,.8)",
           "& .MuiFab-root": {
             opacity: 1,
           },
@@ -35,11 +35,11 @@ const Root = styled("div")(({ populated }: any) => ({
         },
       }
     : {
-        "background-color": "#e5e5e5",
+        backgroundColor: "#e5e5e5",
         fill: "#e5e5e5",
 
         "&:hover": {
-          "background-color": "#c9cccf",
+          backgroundColor: "#c9cccf",
           fill: "#c9cccf",
         },
 

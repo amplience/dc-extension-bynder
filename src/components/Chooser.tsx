@@ -7,14 +7,14 @@ const Root = styled("div")({
   display: "block",
   transition: "all 0.4s ease",
   width: "32%",
-  "min-width": "220px",
-  "max-width": "350px",
+  minWidth: "220px",
+  maxWidth: "350px",
   margin: "0 10px 10px 0",
   position: "relative" as "relative",
   "&:before": {
     content: "''",
     display: "block",
-    "padding-top": "100%",
+    paddingTop: "100%",
   },
 });
 

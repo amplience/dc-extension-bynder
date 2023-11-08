@@ -1,12 +1,12 @@
 import React from "react";
-import { Fab, IconButton } from "@mui/material";
+import { Fab } from "@mui/material";
 import Chooser from "./Chooser";
 import ImageCard from "./ImageCard";
 import ChooserActions from "./ChooserActions";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "./DeleteIcon";
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useContentFieldExtension } from "./WithFieldExtension";
 
 export type ImageFieldProps = {
@@ -19,16 +19,16 @@ export type ImageFieldProps = {
 };
 
 const isObjectEmpty = (objectName) => {
-  return Object.keys(objectName).length === 0
-}
+  return Object.keys(objectName).length === 0;
+};
 
 function BynderImageField(props: ImageFieldProps) {
   const { value, schema, readOnly, onChange, onBrowse, ...other } = props;
-  
+
   const sdk = useContentFieldExtension();
-  
+
   //@ts-ignore
-  const { bynderConfig: installedBynderConfig, contentMapping } = {
+  const { bynderConfig: installedBynderConfig } = {
     ...sdk.params.installation,
     ...sdk.params.instance,
   };
@@ -58,15 +58,23 @@ function BynderImageField(props: ImageFieldProps) {
       <ChooserActions populated={hasValue}>
         {hasValue && (
           <>
-            <Fab onClick={() => {
-              window.open(`${installedBynderConfig.portal.url}/media/?mediaId=${value.databaseId}&viewType=grid`, '_blank', 'noreferrer');
-            }}>
+            <Fab
+              onClick={() => {
+                window.open(
+                  `${installedBynderConfig.portal.url}/media/?mediaId=${value.databaseId}&viewType=grid`,
+                  "_blank",
+                  "noreferrer",
+                );
+              }}
+            >
               <OpenInNewIcon />
             </Fab>
-            <Fab onClick={() => {
-              handleDelete()
-              handleSelectImage()
-            }}>
+            <Fab
+              onClick={() => {
+                handleDelete();
+                handleSelectImage();
+              }}
+            >
               <SwapHorizIcon />
             </Fab>
             <Fab onClick={handleDelete}>

@@ -1,4 +1,3 @@
-import { styled } from "@mui/system";
 import React, { PropsWithChildren } from "react";
 import Card from "./Card";
 import CardHeader from "./CardHeader";
@@ -13,15 +12,17 @@ function ImageCard(props: ImageCardProps) {
 
   return (
     <Card {...other}>
-      <div style={{
-        width: "100%",
-        height: "100%",
-        margin: "0 auto",
-        backgroundImage: `url(${src})`,
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "50%",
-      }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          margin: "0 auto",
+          backgroundImage: `url(${src})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "50%",
+        }}
+      >
         <CardHeader>{label}</CardHeader>
       </div>
     </Card>

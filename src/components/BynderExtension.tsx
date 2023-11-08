@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useContentFieldExtension } from "./WithFieldExtension";
 import BynderImageField from "./BynderImageField";
+import { serialize } from "../utils/serialize";
+import { ContentMapping, contentMapper } from "../utils/content-mapper";
 
 function BynderExtension() {
   const sdk = useContentFieldExtension();
@@ -8,7 +10,7 @@ function BynderExtension() {
   const [openDialog, setOpenDialog] = useState(false);
 
   //@ts-ignore
-  const { bynderConfig: installedBynderConfig, contentMapping } = {
+  const { bynderConfig: installedBynderConfig, contentMapping: installedMappings } = {
     ...sdk.params.installation,
     ...sdk.params.instance,
   };
@@ -27,9 +29,25 @@ function BynderExtension() {
     authentication: undefined,
   };
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-    sdk.field.setValue(newValue);
+  const defaultMapping: ContentMapping = {
+    name: { jsonPath: "$.name" },
+    files: { jsonPath: "$.files" },
+    databaseId: { jsonPath: "$.databaseId" },
+    url: { jsonPath: "$.url" },
+  };
+
+  const contentMapping: ContentMapping = installedMappings
+    ? {
+        ...installedMappings,
+        ...defaultMapping,
+      }
+    : null;
+
+  const handleChange = (asset) => {
+    const mappedAsset = contentMapping ? contentMapper(asset, contentMapping) : asset;
+    const serializedAsset = serialize(mappedAsset);
+    setValue(serializedAsset);
+    sdk.field.setValue(serializedAsset);
   };
 
   const handleOpenDialog = () => {
