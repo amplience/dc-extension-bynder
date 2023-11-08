@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useContentFieldExtension } from "./WithFieldExtension";
 import BynderImageField from "./BynderImageField";
-import jsonpath from "jsonpath";
+import { serialize } from "../utils/serialize";
+import { ContentMapping, contentMapper } from "../utils/content-mapper";
 
 function BynderExtension() {
   const sdk = useContentFieldExtension();
@@ -28,33 +29,25 @@ function BynderExtension() {
     authentication: undefined,
   };
 
-  const defaultMapping: Record<string, { jsonPath: string }> = {
+  const defaultMapping: ContentMapping = {
     name: { jsonPath: "$.name" },
     files: { jsonPath: "$.files" },
     databaseId: { jsonPath: "$.databaseId" },
+    url: { jsonPath: "$.url" },
   };
 
-  const mappings: Record<string, { jsonPath: string }> = installedMappings
+  const contentMapping: ContentMapping = installedMappings
     ? {
         ...installedMappings,
         ...defaultMapping,
       }
     : null;
 
-  const valueMapper = (value, mappings: Record<string, { jsonPath: string }>) => {
-    let mappedValues = {};
-    for (const [key, mapping] of Object.entries(mappings)) {
-      if (value) {
-        mappedValues[key] = jsonpath.query(value, mapping.jsonPath)[0];
-      }
-    }
-    return mappedValues;
-  };
-
-  const handleChange = (newValue) => {
-    let mappedValues = mappings ? valueMapper(newValue, mappings) : newValue;
-    setValue(mappedValues);
-    sdk.field.setValue(mappedValues);
+  const handleChange = (asset) => {
+    const mappedAsset = contentMapping ? contentMapper(asset, contentMapping) : asset;
+    const serializedAsset = serialize(mappedAsset);
+    setValue(serializedAsset);
+    sdk.field.setValue(serializedAsset);
   };
 
   const handleOpenDialog = () => {

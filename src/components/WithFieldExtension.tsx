@@ -35,7 +35,6 @@ function WithContentFieldExtension({ children, pollForm = true }) {
   useEffect(() => {
     init().then((sdk: ContentFieldExtension) => {
       setReadOnly(sdk.form.readOnly);
-      console.log(sdk.hub);
       sdk.field.getValue().then((value) => {
         setInitialValue(value);
         setSDK(sdk);
