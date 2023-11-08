@@ -13,16 +13,16 @@ function ImageCard(props: ImageCardProps) {
 
   return (
     <Card {...other}>
-      <CardHeader>{label}</CardHeader>
       <div style={{
-        width: "80%",
-        height: "80%",
+        width: "100%",
+        height: "100%",
         margin: "0 auto",
         backgroundImage: `url(${src})`,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50%",
       }}>
+        <CardHeader>{label}</CardHeader>
       </div>
     </Card>
   );
