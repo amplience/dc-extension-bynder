@@ -2,6 +2,7 @@
   "name": "dc-extension-bynder",
   "version": "0.0.1",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@datadog/browser-rum": "^4.45.0",
     "@mui/icons-material": "^5.14.0",
@@ -22,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write \"{src,test}/**/*.{ts[x],js}\""
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +45,7 @@
     "@types/json-pointer": "^1.0.34",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-plugin-storybook": "^0.6.12",
+    "prettier": "3.0.3",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.26",
     "webpack": "^5.88.1"

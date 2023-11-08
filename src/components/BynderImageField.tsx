@@ -5,6 +5,8 @@ import ImageCard from "./ImageCard";
 import ChooserActions from "./ChooserActions";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "./DeleteIcon";
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 export type ImageFieldProps = {
   value?: any;
@@ -36,19 +38,27 @@ function BynderImageField(props: ImageFieldProps) {
     <Chooser {...other}>
       {hasValue && (
         <ImageCard
-          src={`${
-            value?.files?.webImage?.url ||
-            value?.files?.thumbnail?.url ||
-            value?.originalUrl
-          }`}
+          src={`${value?.files?.webImage?.url || value?.files?.thumbnail?.url || value?.originalUrl}`}
           label={value.name || ""}
         />
       )}
       <ChooserActions populated={hasValue}>
         {hasValue && (
-          <Fab onClick={handleDelete}>
-            <DeleteIcon />
-          </Fab>
+          <>
+            <Fab onClick={() => {
+            }}>
+              <OpenInNewIcon />
+            </Fab>
+            <Fab onClick={() => {
+              handleDelete()
+              handleSelectImage()
+            }}>
+              <SwapHorizIcon />
+            </Fab>
+            <Fab onClick={handleDelete}>
+              <DeleteIcon />
+            </Fab>
+          </>
         )}
 
         {!hasValue && (
