@@ -8,28 +8,21 @@ export type ImageCardProps = PropsWithChildren<{
   src: string;
 }>;
 
-const Image = styled("img")({
-  display: "block",
-  verticalAlign: "middle" as "middle",
-  boxSizing: "border-box" as "border-box",
-  padding: "0 10px",
-  position: "relative" as "relative",
-  top: 0,
-  left: 0,
-  width: 300,
-  height: 300,
-  margin: "0 auto",
-  objectFit: "contain",
-});
-
 function ImageCard(props: ImageCardProps) {
   const { src, label, ...other } = props;
 
   return (
     <Card {...other}>
       <CardHeader>{label}</CardHeader>
-      <div style={{ position: "relative" }}>
-        <Image src={src} alt={label} title={label} />
+      <div style={{
+        width: "80%",
+        height: "80%",
+        margin: "0 auto",
+        backgroundImage: `url(${src})`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "50%",
+      }}>
       </div>
     </Card>
   );
