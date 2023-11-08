@@ -7,6 +7,24 @@ function BynderExtension() {
   const [value, setValue] = useState(sdk.initialValue);
   const [openDialog, setOpenDialog] = useState(false);
 
+  //@ts-ignore
+  const { bynderConfig: installedBynderConfig, contentMapping } = {
+    ...sdk.params.installation,
+    ...sdk.params.instance,
+  };
+
+  const bynderConfig = {
+    ...(installedBynderConfig ? installedBynderConfig : {}),
+    theme: {
+      colorButtonPrimary: "#3380FF",
+    },
+    mode: "SingleSelectFile",
+    onSuccess: function (assets, additionalInfo) {
+      handleChange(assets[0]);
+      setOpenDialog(false);
+    },
+  };
+
   const handleChange = (newValue) => {
     setValue(newValue);
     sdk.field.setValue(newValue);
@@ -15,21 +33,7 @@ function BynderExtension() {
   const handleOpenDialog = () => {
     setOpenDialog(true);
 
-    (window as any).BynderCompactView.open({
-      language: "en_US",
-      theme: {
-        colorButtonPrimary: "#3380FF",
-      },
-      mode: "SingleSelectFile",
-      onSuccess: function (assets, additionalInfo) {
-        handleChange(assets[0]);
-        setOpenDialog(false);
-      },
-      portal: {
-        url: "https://wave-trial.getbynder.com/",
-      },
-      assetTypes: ["image"],
-    });
+    (window as any).BynderCompactView.open(bynderConfig);
   };
 
   return (

@@ -12,5 +12,5 @@ root.render(
         <App />
       </Theme>
     </WithContentFieldExtension>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

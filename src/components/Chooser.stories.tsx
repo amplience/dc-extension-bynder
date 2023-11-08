@@ -44,10 +44,7 @@ export const PopulatedWithImage: Story = {
   args: {
     children: (
       <>
-        <ImageCard
-          src="https://image.smythstoys.com/original/desktop/191259_2.jpg"
-          label="PlayStation 5"
-        />
+        <ImageCard src="https://image.smythstoys.com/original/desktop/191259_2.jpg" label="PlayStation 5" />
         <ChooserActions populated={true}>
           <Fab>
             <AddIcon fontSize="large" />
