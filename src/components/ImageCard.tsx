@@ -16,8 +16,10 @@ const Image = styled("img")({
   position: "relative" as "relative",
   top: 0,
   left: 0,
-  maxHeight: "100%",
-  width: "100%",
+  margin: "0 auto",
+  maxHeight: "75%",
+  maxWidth: "100%", 
+  objectFit: "contain",
 });
 
 function ImageCard(props: ImageCardProps) {
