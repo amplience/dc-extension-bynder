@@ -59,7 +59,7 @@ function BynderImageField(props: ImageFieldProps) {
         {hasValue && (
           <>
             <Fab onClick={() => {
-              window.open(`${installedBynderConfig.portal.url}/media/?mediaId=${value.databaseId}`, '_blank', 'noreferrer');
+              window.open(`${installedBynderConfig.portal.url}/media/?mediaId=${value.databaseId}&viewType=grid`, '_blank', 'noreferrer');
             }}>
               <OpenInNewIcon />
             </Fab>
