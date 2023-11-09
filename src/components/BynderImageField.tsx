@@ -1,5 +1,5 @@
 import React from "react";
-import { Fab } from "@mui/material";
+import { Box, Fab, Stack } from "@mui/material";
 import Chooser from "./Chooser";
 import ImageCard from "./ImageCard";
 import ChooserActions from "./ChooserActions";
@@ -8,24 +8,23 @@ import DeleteIcon from "./DeleteIcon";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useContentFieldExtension } from "./WithFieldExtension";
+import { useItems, useItemsDispatch } from "../context/ItemsContext";
+import AddAction from "./AddAction";
 
 export type ImageFieldProps = {
-  value?: any;
   schema?: any;
   readOnly?: boolean;
   style?: any;
-  onChange?: (newValue: any) => void;
   onBrowse?: () => void;
-};
-
-const isObjectEmpty = (objectName) => {
-  return Object.keys(objectName).length === 0;
+  multiSelect: boolean;
 };
 
 function BynderImageField(props: ImageFieldProps) {
-  const { value, schema, readOnly, onChange, onBrowse, ...other } = props;
+  const { schema, readOnly, onBrowse, multiSelect, ...other } = props;
 
   const sdk = useContentFieldExtension();
+  const items = useItems();
+  const itemsDispatch = useItemsDispatch();
 
   //@ts-ignore
   const { bynderConfig: installedBynderConfig } = {
@@ -33,12 +32,11 @@ function BynderImageField(props: ImageFieldProps) {
     ...sdk.params.instance,
   };
 
-  const hasValue = value != null && !isObjectEmpty(value);
-
-  const handleDelete = () => {
-    if (onChange) {
-      onChange(null);
-    }
+  const handleRemove = (item) => {
+    itemsDispatch({
+      type: "remove",
+      item,
+    });
   };
 
   const handleSelectImage = async () => {
@@ -48,48 +46,63 @@ function BynderImageField(props: ImageFieldProps) {
   };
 
   return (
-    <Chooser {...other} title={value?.name}>
-      {hasValue && (
-        <ImageCard
-          src={`${value?.files?.webImage?.url || value?.files?.thumbnail?.url || value?.originalUrl}`}
-          label={value.name || ""}
-        />
-      )}
-      <ChooserActions populated={hasValue}>
-        {hasValue && (
-          <>
-            <Fab
-              onClick={() => {
-                window.open(
-                  `${installedBynderConfig.portal.url}/media/?mediaId=${value.databaseId}&viewType=grid`,
-                  "_blank",
-                  "noreferrer",
-                );
-              }}
-            >
-              <OpenInNewIcon />
-            </Fab>
-            <Fab
-              onClick={() => {
-                handleDelete();
-                handleSelectImage();
-              }}
-            >
-              <SwapHorizIcon />
-            </Fab>
-            <Fab onClick={handleDelete}>
-              <DeleteIcon />
-            </Fab>
-          </>
+    <Stack direction={"row"}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          p: 1,
+        }}
+      >
+        {items.map((item, index) => (
+          <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative", cursor: "grab" }} key={index}>
+            <Chooser {...other} title={item?.name}>
+              <ImageCard
+                src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
+                label={item.name || ""}
+              />
+              <ChooserActions>
+                <Fab
+                  onClick={() => {
+                    window.open(
+                      `${installedBynderConfig.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`,
+                      "_blank",
+                      "noreferrer",
+                    );
+                  }}
+                >
+                  <OpenInNewIcon />
+                </Fab>
+                <Fab
+                  onClick={() => {
+                    handleRemove(item);
+                    handleSelectImage();
+                  }}
+                >
+                  <SwapHorizIcon />
+                </Fab>
+                <Fab onClick={() => handleRemove(item)}>
+                  <DeleteIcon />
+                </Fab>
+              </ChooserActions>
+            </Chooser>
+          </Box>
+        ))}
+        {(multiSelect || !items.length) && (
+          <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative" }}>
+            <Chooser {...other}>
+              <AddAction>
+                <Fab onClick={handleSelectImage} style={{ backgroundColor: "#ccc" }}>
+                  <AddIcon fontSize="large" style={{ color: "#fff" }} />
+                </Fab>
+              </AddAction>
+            </Chooser>
+          </Box>
         )}
-
-        {!hasValue && (
-          <Fab onClick={handleSelectImage}>
-            <AddIcon fontSize="large" />
-          </Fab>
-        )}
-      </ChooserActions>
-    </Chooser>
+      </Box>
+    </Stack>
   );
 }
 

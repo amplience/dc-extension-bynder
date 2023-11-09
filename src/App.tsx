@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { datadogRum } from "@datadog/browser-rum";
 import MediaLinkExtension from "./components/BynderExtension";
+import { ItemsProvider } from "./context/ItemsContext";
 
 function App() {
   useEffect(() => {
@@ -29,7 +30,11 @@ function App() {
     }
   }, []);
 
-  return <MediaLinkExtension />;
+  return (
+    <ItemsProvider>
+      <MediaLinkExtension />
+    </ItemsProvider>
+  );
 }
 
 export default App;

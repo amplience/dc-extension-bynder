@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 import React, { PropsWithChildren } from "react";
 
-export type ChooserActionsProps = PropsWithChildren<{
+export type AddActionProps = PropsWithChildren<{
   populated?: boolean;
 }>;
 
@@ -18,18 +18,15 @@ const Root = styled("div")(() => ({
   alignItems: "center",
   alignContent: "center",
   justifyContent: "center",
+  fill: "#e5e5e5",
+  border: "1px solid #e5e5e5",
 
-  fill: "#fff",
   "&:hover": {
-    backgroundColor: "rgba(41,51,63,.8)",
-    "& .MuiFab-root": {
-      opacity: 1,
-    },
+    fill: "#c9cccf",
   },
+
   "& .MuiFab-root": {
-    opacity: 0,
-    color: "#fff",
-    backgroundColor: "#ccc",
+    backgroundColor: "#fff",
   },
 
   "&:hover $content": {
@@ -43,7 +40,7 @@ const Root = styled("div")(() => ({
 
 const ContentWrapper = styled("div")({});
 
-function ChooserActions(props: ChooserActionsProps) {
+function AddAction(props: AddActionProps) {
   const { children, ...other } = props;
 
   return (
@@ -53,4 +50,4 @@ function ChooserActions(props: ChooserActionsProps) {
   );
 }
 
-export default ChooserActions;
+export default AddAction;
