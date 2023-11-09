@@ -3,9 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 18
-        - nvm use 18
-        - npm install
+        - nvm install 18.13
+        - nvm use 18.13
+        - npm ci
     build:
       commands:
         - CI=false npm run build
