@@ -16,13 +16,30 @@ function BynderExtension() {
     ...sdk.params.instance,
   };
 
+  const defaultMapping: ContentMapping = {
+    name: { jsonPath: "$.name" },
+    files: { jsonPath: "$.files" },
+    databaseId: { jsonPath: "$.databaseId" },
+    url: { jsonPath: "$.url" },
+  };
+
+  const contentMapping: ContentMapping = installedMappings
+    ? {
+        ...installedMappings,
+        ...defaultMapping,
+      }
+    : null;
+
   const bynderConfig = {
     ...(installedBynderConfig ? installedBynderConfig : {}),
     theme: {
       colorButtonPrimary: "#3380FF",
     },
     onSuccess: function (assets) {
-      handleChange(assets);
+      const mappedAssets = contentMapping
+        ? assets?.map((asset) => serialize(contentMapper(asset, contentMapping)))
+        : assets;
+      updateItems(mappedAssets);
       setOpenDialog(false);
     },
     onLogout: undefined,
@@ -48,31 +65,6 @@ function BynderExtension() {
     } else {
       sdk.field.setValue(items[0]);
     }
-  };
-
-  const defaultMapping: ContentMapping = {
-    name: { jsonPath: "$.name" },
-    files: { jsonPath: "$.files" },
-    databaseId: { jsonPath: "$.databaseId" },
-    url: { jsonPath: "$.url" },
-  };
-
-  const contentMapping: ContentMapping = installedMappings
-    ? {
-        ...installedMappings,
-        ...defaultMapping,
-      }
-    : null;
-
-  const handleChange = (newItems: Record<string, any>[]) => {
-    if (!newItems) {
-      return;
-    }
-    const mappedItems = contentMapping
-      ? newItems?.map((item) => serialize(contentMapper(item, contentMapping)))
-      : newItems;
-
-    updateItems(mappedItems);
   };
 
   const handleOpenDialog = () => {
