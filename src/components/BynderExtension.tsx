@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useContentFieldExtension } from "./WithFieldExtension";
 import BynderImageField from "./BynderImageField";
 import { serialize } from "../utils/serialize";
 import { ContentMapping, contentMapper } from "../utils/content-mapper";
-import { useItems, useItemsDispatch } from "../context/ItemsContext";
+import { normaliseInitialValue } from "../utils/initial-value";
 
 function BynderExtension() {
   const sdk = useContentFieldExtension();
   const [openDialog, setOpenDialog] = useState(false);
-  const items = useItems();
-  const itemsDispatch = useItemsDispatch();
+  const [items, setItems] = useState(normaliseInitialValue(sdk.initialValue));
 
-  //@ts-ignore
+  // @ts-ignore
   const { bynderConfig: installedBynderConfig, contentMapping: installedMappings } = {
     ...sdk.params.installation,
     ...sdk.params.instance,
@@ -32,6 +31,25 @@ function BynderExtension() {
 
   const multiSelectEnabled = bynderConfig.mode === "MultiSelect";
 
+  const updateItems = (items) => {
+    setItems(items);
+    setField(items);
+  };
+
+  const removeItem = (id) => {
+    const updatedItems = items.filter((item) => item.databaseId !== id);
+    setItems(updatedItems);
+    setField(updatedItems);
+  };
+
+  const setField = (items) => {
+    if (multiSelectEnabled) {
+      sdk.field.setValue(items);
+    } else {
+      sdk.field.setValue(items[0]);
+    }
+  };
+
   const defaultMapping: ContentMapping = {
     name: { jsonPath: "$.name" },
     files: { jsonPath: "$.files" },
@@ -46,14 +64,6 @@ function BynderExtension() {
       }
     : null;
 
-  useEffect(() => {
-    if (multiSelectEnabled) {
-      sdk.field.setValue(items);
-    } else {
-      sdk.field.setValue(items[0]);
-    }
-  }, [items, multiSelectEnabled, sdk.field]);
-
   const handleChange = (newItems: Record<string, any>[]) => {
     if (!newItems) {
       return;
@@ -62,23 +72,16 @@ function BynderExtension() {
       ? newItems?.map((item) => serialize(contentMapper(item, contentMapping)))
       : newItems;
 
-    if (multiSelectEnabled) {
-      itemsDispatch({
-        type: "add",
-        items: mappedItems,
-      });
-    } else {
-      itemsDispatch({
-        type: "add",
-        items: [mappedItems[0]],
-      });
-    }
+    updateItems(mappedItems);
   };
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
     const selectedAssets = items.map((item) => item.databaseId);
-    (window as any).BynderCompactView.open({ ...bynderConfig, selectedAssets });
+    (window as any).BynderCompactView.open({
+      ...bynderConfig,
+      selectedAssets,
+    });
   };
 
   return (
@@ -91,9 +94,12 @@ function BynderExtension() {
     >
       <div style={{ display: "flex", flexDirection: "row" }}>
         <BynderImageField
+          items={items}
           readOnly={sdk.readOnly}
           schema={sdk.field.schema}
           onBrowse={handleOpenDialog}
+          onUpdate={updateItems}
+          onRemove={removeItem}
           multiSelect={multiSelectEnabled}
         />
       </div>

@@ -3,7 +3,6 @@ import { Box, Fab, Stack } from "@mui/material";
 import Chooser from "./Chooser";
 import AddIcon from "@mui/icons-material/Add";
 import { useContentFieldExtension } from "./WithFieldExtension";
-import { useItems, useItemsDispatch } from "../context/ItemsContext";
 import AddAction from "./AddAction";
 import { DndContext, KeyboardSensor, PointerSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core";
 import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
@@ -12,19 +11,20 @@ import SortableListItem from "./SortableListItem";
 import { MediaItem } from "./MediaItem";
 
 export type ImageFieldProps = {
+  items: any;
   schema?: any;
   readOnly?: boolean;
   style?: any;
   onBrowse?: () => void;
+  onUpdate?: (items) => void;
+  onRemove?: (id) => void;
   multiSelect: boolean;
 };
 
 function BynderImageField(props: ImageFieldProps) {
-  const { schema, readOnly, onBrowse, multiSelect, ...other } = props;
+  const { items, schema, readOnly, onBrowse, multiSelect, onUpdate, onRemove, ...other } = props;
 
   const sdk = useContentFieldExtension();
-  const items = useItems();
-  const itemsDispatch = useItemsDispatch();
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -42,13 +42,6 @@ function BynderImageField(props: ImageFieldProps) {
     ...sdk.params.instance,
   };
 
-  const handleRemove = (item) => {
-    itemsDispatch({
-      type: "remove",
-      item,
-    });
-  };
-
   const handleSelectImage = async () => {
     try {
       onBrowse();
@@ -60,10 +53,7 @@ function BynderImageField(props: ImageFieldProps) {
     if (active?.id !== over?.id) {
       const oldIndex = items.findIndex((item) => item.databaseId === active?.id);
       const newIndex = items.findIndex((item) => item.databaseId === over?.id);
-      itemsDispatch({
-        type: "reorder",
-        items: arrayMove(items, oldIndex, newIndex),
-      });
+      onUpdate(arrayMove(items, oldIndex, newIndex));
     }
   };
 
@@ -91,7 +81,7 @@ function BynderImageField(props: ImageFieldProps) {
                   <MediaItem
                     item={item}
                     config={installedBynderConfig}
-                    handleRemove={handleRemove}
+                    handleRemove={() => onRemove(item.databaseId)}
                     handleSelectImage={handleSelectImage}
                     {...other}
                   />
@@ -104,7 +94,7 @@ function BynderImageField(props: ImageFieldProps) {
           <MediaItem
             item={items[0]}
             config={installedBynderConfig}
-            handleRemove={handleRemove}
+            handleRemove={() => onRemove(items[0].databaseId)}
             handleSelectImage={handleSelectImage}
             {...other}
           />
