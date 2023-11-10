@@ -1,15 +1,24 @@
 import { createContext, useContext, useReducer } from "react";
 import { useContentFieldExtension } from "../components/WithFieldExtension";
+import { isObjectEmpty } from "../utils/is-object-empty";
+import { isObject } from "../utils/is-object";
 
 const ItemsContext = createContext(null);
 const ItemsDispatchContext = createContext(null);
 
+const normaliseInitialValue = (value) => {
+  if (Array.isArray(value)) {
+    return value;
+  }
+  if (isObject(value) && isObjectEmpty(value)) {
+    return [];
+  }
+  return [value];
+};
+
 export function ItemsProvider({ children }) {
   const sdk = useContentFieldExtension();
-  const [items, dispatch] = useReducer(
-    itemsReducer,
-    Array.isArray(sdk.initialValue) ? sdk.initialValue : [sdk.initialValue],
-  );
+  const [items, dispatch] = useReducer(itemsReducer, normaliseInitialValue(sdk.initialValue));
 
   return (
     <ItemsContext.Provider value={items}>
