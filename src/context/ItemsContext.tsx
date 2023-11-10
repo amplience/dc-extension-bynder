@@ -34,5 +34,8 @@ function itemsReducer(items, action) {
     case "remove": {
       return items.filter((item) => item.databaseId !== action.item?.databaseId);
     }
+    case "reorder": {
+      return action.items;
+    }
   }
 }

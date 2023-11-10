@@ -1,15 +1,15 @@
 import React from "react";
 import { Box, Fab, Stack } from "@mui/material";
 import Chooser from "./Chooser";
-import ImageCard from "./ImageCard";
-import ChooserActions from "./ChooserActions";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "./DeleteIcon";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useContentFieldExtension } from "./WithFieldExtension";
 import { useItems, useItemsDispatch } from "../context/ItemsContext";
 import AddAction from "./AddAction";
+import { DndContext, KeyboardSensor, PointerSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { restrictToParentElement, restrictToWindowEdges } from "@dnd-kit/modifiers";
+import SortableListItem from "./SortableListItem";
+import { MediaItem } from "./MediaItem";
 
 export type ImageFieldProps = {
   schema?: any;
@@ -25,6 +25,16 @@ function BynderImageField(props: ImageFieldProps) {
   const sdk = useContentFieldExtension();
   const items = useItems();
   const itemsDispatch = useItemsDispatch();
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
 
   //@ts-ignore
   const { bynderConfig: installedBynderConfig } = {
@@ -45,6 +55,18 @@ function BynderImageField(props: ImageFieldProps) {
     } catch (err) {}
   };
 
+  const dragEnd = (event) => {
+    const { active, over } = event;
+    if (active?.id !== over?.id) {
+      const oldIndex = items.findIndex((item) => item.databaseId === active?.id);
+      const newIndex = items.findIndex((item) => item.databaseId === over?.id);
+      itemsDispatch({
+        type: "reorder",
+        items: arrayMove(items, oldIndex, newIndex),
+      });
+    }
+  };
+
   return (
     <Stack direction={"row"}>
       <Box
@@ -56,40 +78,37 @@ function BynderImageField(props: ImageFieldProps) {
           p: 1,
         }}
       >
-        {items.map((item, index) => (
-          <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative", cursor: "grab" }} key={index}>
-            <Chooser {...other} title={item?.name}>
-              <ImageCard
-                src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
-                label={item.name || ""}
-              />
-              <ChooserActions>
-                <Fab
-                  onClick={() => {
-                    window.open(
-                      `${installedBynderConfig.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`,
-                      "_blank",
-                      "noreferrer",
-                    );
-                  }}
-                >
-                  <OpenInNewIcon />
-                </Fab>
-                <Fab
-                  onClick={() => {
-                    handleRemove(item);
-                    handleSelectImage();
-                  }}
-                >
-                  <SwapHorizIcon />
-                </Fab>
-                <Fab onClick={() => handleRemove(item)}>
-                  <DeleteIcon />
-                </Fab>
-              </ChooserActions>
-            </Chooser>
-          </Box>
-        ))}
+        {multiSelect && (
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={dragEnd}
+            modifiers={[restrictToWindowEdges, restrictToParentElement]}
+          >
+            <SortableContext items={items.map((item) => item.databaseId)} strategy={rectSortingStrategy}>
+              {items.map((item) => (
+                <SortableListItem id={item.databaseId} key={item.databaseId}>
+                  <MediaItem
+                    item={item}
+                    config={installedBynderConfig}
+                    handleRemove={handleRemove}
+                    handleSelectImage={handleSelectImage}
+                    {...other}
+                  />
+                </SortableListItem>
+              ))}
+            </SortableContext>
+          </DndContext>
+        )}
+        {!multiSelect && items.length > 0 && (
+          <MediaItem
+            item={items[0]}
+            config={installedBynderConfig}
+            handleRemove={handleRemove}
+            handleSelectImage={handleSelectImage}
+            {...other}
+          />
+        )}
         {(multiSelect || !items.length) && (
           <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative" }}>
             <Chooser {...other}>
