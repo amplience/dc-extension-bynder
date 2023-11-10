@@ -28,14 +28,16 @@ export function useItemsDispatch() {
 
 function itemsReducer(items, action) {
   switch (action.type) {
-    case "add": {
-      return [...items, ...action.items];
+    case "add":
+    case "reorder":
+    case "replace": {
+      return action.items;
     }
     case "remove": {
       return items.filter((item) => item.databaseId !== action.item?.databaseId);
     }
-    case "reorder": {
-      return action.items;
+    default: {
+      throw Error("Unknown action: " + action.type);
     }
   }
 }

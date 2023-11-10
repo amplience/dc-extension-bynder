@@ -23,7 +23,6 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
         </Fab>
         <Fab
           onClick={() => {
-            handleRemove(item);
             handleSelectImage();
           }}
         >

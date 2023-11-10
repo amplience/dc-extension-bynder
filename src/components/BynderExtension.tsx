@@ -77,8 +77,8 @@ function BynderExtension() {
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
-
-    (window as any).BynderCompactView.open(bynderConfig);
+    const selectedAssets = items.map((item) => item.databaseId);
+    (window as any).BynderCompactView.open({ ...bynderConfig, selectedAssets });
   };
 
   return (
