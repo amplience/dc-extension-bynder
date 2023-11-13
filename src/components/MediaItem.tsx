@@ -28,7 +28,7 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
             <OpenInNewIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title='Swap Image' arrow>
+        <Tooltip title='Swap Asset' arrow>
           <Fab
             onClick={() => {
               handleSelectImage();
@@ -37,7 +37,7 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
             <SwapHorizIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title='Remove Image' arrow>
+        <Tooltip title='Remove Asset' arrow>
           <Fab onClick={() => handleRemove(item)}>
             <DeleteIcon />
           </Fab>
