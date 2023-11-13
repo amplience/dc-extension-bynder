@@ -44,6 +44,44 @@ Sandbox Permissions:
 - ✅ Allow Popups
 - TBC
 
+### Installation Parameters
+
+Here is a sample installation parameters payload:
+
+```json
+{
+  "bynderConfig": {
+    "portal": {
+      "url": "https://wave-trial.getbynder.com/"
+    },
+    "assetTypes": [
+      "image"
+    ],
+    "mode": "MultiSelect"
+  },
+  "contentMapping": {
+    "title": {
+      "jsonPath": "$.name"
+    },
+    "mediaId": {
+      "jsonPath": "$.databaseId"
+    },
+    "url": {
+      "jsonPath": "$.url"
+    }
+  }
+}
+```
+
+Elements in the `bynderConfig` object are passed to configure Bynder. The following asset types can be used:
+- image
+- document
+- audio
+- video
+
+The mode can either be `SingleSelect` or `MultiSelect` if you want to choose more than one media.
+
+It's also possible to use content mapping to get and rename the properties you need for the extension, using JSON Path.
 
 ## 🌍 Useful Links
 -   [Contributing](./CONTRIBUTING.md)
