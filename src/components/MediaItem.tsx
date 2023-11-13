@@ -8,11 +8,16 @@ import DeleteIcon from "./DeleteIcon";
 
 export function MediaItem({ item, config, handleRemove, handleSelectImage, ...other }) {
   return (
-    <Chooser {...other} title={item?.name}>
+   
+    <Chooser {...other}>
+       
       <ImageCard
         src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
         label={item.name || ""}
       />
+      
+        <Tooltip title={item?.name} arrow placement="top" followCursor={true}>
+      <span>
       <ChooserActions>
         <Tooltip title='Open in Bynder' arrow>
           <Fab
@@ -38,6 +43,8 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
           </Fab>
         </Tooltip>
       </ChooserActions>
+      </span>
+        </Tooltip>
     </Chooser>
   );
 }
