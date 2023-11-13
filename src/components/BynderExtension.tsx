@@ -3,30 +3,17 @@ import { useContentFieldExtension } from "./WithFieldExtension";
 import BynderImageField from "./BynderImageField";
 import { serialize } from "../utils/serialize";
 import { ContentMapping, contentMapper } from "../utils/content-mapper";
+import { normaliseInitialValue } from "../utils/initial-value";
 
 function BynderExtension() {
   const sdk = useContentFieldExtension();
-  const [value, setValue] = useState(sdk.initialValue);
   const [openDialog, setOpenDialog] = useState(false);
+  const [items, setItems] = useState(normaliseInitialValue(sdk.initialValue));
 
-  //@ts-ignore
+  // @ts-ignore
   const { bynderConfig: installedBynderConfig, contentMapping: installedMappings } = {
     ...sdk.params.installation,
     ...sdk.params.instance,
-  };
-
-  const bynderConfig = {
-    ...(installedBynderConfig ? installedBynderConfig : {}),
-    theme: {
-      colorButtonPrimary: "#3380FF",
-    },
-    mode: "SingleSelectFile",
-    onSuccess: function (assets, additionalInfo) {
-      handleChange(assets[0]);
-      setOpenDialog(false);
-    },
-    onLogout: undefined,
-    authentication: undefined,
   };
 
   const defaultMapping: ContentMapping = {
@@ -43,17 +30,50 @@ function BynderExtension() {
       }
     : null;
 
-  const handleChange = (asset) => {
-    const mappedAsset = contentMapping ? contentMapper(asset, contentMapping) : asset;
-    const serializedAsset = serialize(mappedAsset);
-    setValue(serializedAsset);
-    sdk.field.setValue(serializedAsset);
+  const bynderConfig = {
+    ...(installedBynderConfig ? installedBynderConfig : {}),
+    theme: {
+      colorButtonPrimary: "#3380FF",
+    },
+    onSuccess: function (assets) {
+      const mappedAssets = contentMapping
+        ? assets?.map((asset) => serialize(contentMapper(asset, contentMapping)))
+        : assets;
+      updateItems(mappedAssets);
+      setOpenDialog(false);
+    },
+    onLogout: undefined,
+    authentication: undefined,
+  };
+
+  const multiSelectEnabled = bynderConfig.mode === "MultiSelect";
+
+  const updateItems = (items) => {
+    setItems(items);
+    setField(items);
+  };
+
+  const removeItem = (id) => {
+    const updatedItems = items.filter((item) => item.databaseId !== id);
+    setItems(updatedItems);
+    setField(updatedItems);
+  };
+
+  const setField = (items) => {
+    if (multiSelectEnabled) {
+      sdk.field.setValue(items);
+    } else {
+      sdk.field.setValue(items[0]);
+    }
   };
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
-
-    (window as any).BynderCompactView.open(bynderConfig);
+    const selectedAssets = items.map((item) => item.databaseId);
+    (window as any).BynderCompactView.open({
+      ...bynderConfig,
+      selectedAssets,
+    });
   };
 
   return (
@@ -66,12 +86,13 @@ function BynderExtension() {
     >
       <div style={{ display: "flex", flexDirection: "row" }}>
         <BynderImageField
-          value={value}
+          items={items}
           readOnly={sdk.readOnly}
           schema={sdk.field.schema}
-          style={{ minWidth: "33%" }}
           onBrowse={handleOpenDialog}
-          onChange={handleChange}
+          onUpdate={updateItems}
+          onRemove={removeItem}
+          multiSelect={multiSelectEnabled}
         />
       </div>
     </div>
