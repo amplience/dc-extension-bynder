@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Fab, Stack } from "@mui/material";
+import { Box, Fab, Stack, Tooltip } from "@mui/material";
 import Chooser from "./Chooser";
 import AddIcon from "@mui/icons-material/Add";
 import { useContentFieldExtension } from "./WithFieldExtension";
@@ -103,9 +103,11 @@ function BynderImageField(props: ImageFieldProps) {
           <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative" }}>
             <Chooser {...other}>
               <AddAction>
-                <Fab onClick={handleSelectImage} style={{ backgroundColor: "#ccc" }}>
-                  <AddIcon fontSize="large" style={{ color: "#fff" }} />
-                </Fab>
+                <Tooltip title='Add Image' arrow>
+                  <Fab onClick={handleSelectImage} style={{ backgroundColor: "#ccc" }}>
+                    <AddIcon fontSize="large" style={{ color: "#fff" }} />
+                  </Fab>
+                </Tooltip>
               </AddAction>
             </Chooser>
           </Box>
