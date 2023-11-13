@@ -16,7 +16,7 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
       <ChooserActions>
         <Fab
           onClick={() => {
-            window.open(`${config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`, "_blank", "noreferrer");
+            window.open(`${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`, "_blank", "noreferrer");
           }}
         >
           <OpenInNewIcon />
