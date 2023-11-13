@@ -1,4 +1,4 @@
-import { Fab } from "@mui/material";
+import { Fab, Tooltip } from "@mui/material";
 import Chooser from "./Chooser";
 import ChooserActions from "./ChooserActions";
 import ImageCard from "./ImageCard";
@@ -14,23 +14,29 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
         label={item.name || ""}
       />
       <ChooserActions>
-        <Fab
-          onClick={() => {
-            window.open(`${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`, "_blank", "noreferrer");
-          }}
-        >
-          <OpenInNewIcon />
-        </Fab>
-        <Fab
-          onClick={() => {
-            handleSelectImage();
-          }}
-        >
-          <SwapHorizIcon />
-        </Fab>
-        <Fab onClick={() => handleRemove(item)}>
-          <DeleteIcon />
-        </Fab>
+        <Tooltip title='Open in Bynder' arrow>
+          <Fab
+            onClick={() => {
+              window.open(`${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`, "_blank", "noreferrer");
+            }}
+          >
+            <OpenInNewIcon />
+          </Fab>
+        </Tooltip>
+        <Tooltip title='Swap Image' arrow>
+          <Fab
+            onClick={() => {
+              handleSelectImage();
+            }}
+          >
+            <SwapHorizIcon />
+          </Fab>
+        </Tooltip>
+        <Tooltip title='Remove Image' arrow>
+          <Fab onClick={() => handleRemove(item)}>
+            <DeleteIcon />
+          </Fab>
+        </Tooltip>
       </ChooserActions>
     </Chooser>
   );
