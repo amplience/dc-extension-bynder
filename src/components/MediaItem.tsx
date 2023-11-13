@@ -6,7 +6,7 @@ import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DeleteIcon from "./DeleteIcon";
 
-export function MediaItem({ item, config, handleRemove, handleSelectImage, ...other }) {
+export function MediaItem({ item, config, handleRemove, handleReplace, ...other }) {
   return (
     <Chooser {...other} title={item?.name}>
       <ImageCard
@@ -14,25 +14,29 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
         label={item.name || ""}
       />
       <ChooserActions>
-        <Tooltip title='Open in Bynder' arrow>
+        <Tooltip title="Open in Bynder" arrow>
           <Fab
             onClick={() => {
-              window.open(`${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`, "_blank", "noreferrer");
+              window.open(
+                `${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`,
+                "_blank",
+                "noreferrer",
+              );
             }}
           >
             <OpenInNewIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title='Swap Image' arrow>
+        <Tooltip title="Swap Image" arrow>
           <Fab
             onClick={() => {
-              handleSelectImage();
+              handleReplace();
             }}
           >
             <SwapHorizIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title='Remove Image' arrow>
+        <Tooltip title="Remove Image" arrow>
           <Fab onClick={() => handleRemove(item)}>
             <DeleteIcon />
           </Fab>
