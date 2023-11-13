@@ -6,6 +6,8 @@ export type ContentFieldExtensionContextState = ContentFieldExtension & {
   formValue: any;
   readOnly: boolean;
   fieldPointer: string | undefined;
+  title: string;
+  description: string;
 };
 
 export const ContentFieldExtensionContext = createContext<ContentFieldExtensionContextState>(undefined);
@@ -20,6 +22,8 @@ function WithContentFieldExtension({ children, pollForm = true }) {
   const [formValue, setFormValue] = useState({});
   const [readOnly, setReadOnly] = useState(false);
   const [fieldPointer, setFieldPointer] = useState(undefined);
+  const [title, setTitle] = useState(undefined);
+  const [description, setDescription] = useState(undefined);
 
   const detectFieldPointer = async (sdk: ContentFieldExtension) => {
     for (let potentialInvalidValue of [1, "", true, {}, []]) {
@@ -38,6 +42,8 @@ function WithContentFieldExtension({ children, pollForm = true }) {
       sdk.field.getValue().then((value) => {
         setInitialValue(value);
         setSDK(sdk);
+        setTitle(sdk.field.schema?.title);
+        setDescription(sdk.field.schema?.description);
         detectFieldPointer(sdk)
           .then(setFieldPointer)
           .catch(() => {});
@@ -70,7 +76,9 @@ function WithContentFieldExtension({ children, pollForm = true }) {
 
   return (
     sdk && (
-      <ContentFieldExtensionContext.Provider value={{ ...sdk, initialValue, readOnly, formValue, fieldPointer }}>
+      <ContentFieldExtensionContext.Provider
+        value={{ ...sdk, initialValue, readOnly, formValue, fieldPointer, title, description }}
+      >
         {children}
       </ContentFieldExtensionContext.Provider>
     )

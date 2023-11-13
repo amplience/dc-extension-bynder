@@ -4,6 +4,7 @@ import BynderImageField from "./BynderImageField";
 import { serialize } from "../utils/serialize";
 import { ContentMapping, contentMapper } from "../utils/content-mapper";
 import { normaliseInitialValue } from "../utils/initial-value";
+import { FieldDetails } from "./FieldDetails";
 
 function BynderExtension() {
   const sdk = useContentFieldExtension();
@@ -84,6 +85,7 @@ function BynderExtension() {
         minHeight: openDialog ? 600 : 300,
       }}
     >
+      <FieldDetails title={sdk.title} description={sdk.description} />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <BynderImageField
           items={items}
