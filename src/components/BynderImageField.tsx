@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Fab, Stack, Tooltip } from "@mui/material";
+import { Box, Fab, Stack } from "@mui/material";
 import Chooser from "./Chooser";
 import AddIcon from "@mui/icons-material/Add";
 import { useContentFieldExtension } from "./WithFieldExtension";
@@ -9,6 +9,7 @@ import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordi
 import { restrictToParentElement, restrictToWindowEdges } from "@dnd-kit/modifiers";
 import SortableListItem from "./SortableListItem";
 import { MediaItem } from "./MediaItem";
+import Tooltip from "./Tooltip";
 
 export type ImageFieldProps = {
   items: any;
@@ -110,9 +111,12 @@ function BynderImageField(props: ImageFieldProps) {
           <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative" }}>
             <Chooser {...other}>
               <AddAction>
-                <Tooltip title="Add Image" arrow>
-                  <Fab disabled={schema.type === 'array' && schema?.maxItems && multiSelect && items.length >= schema.maxItems} 
-                    onClick={handleAdd} 
+                <Tooltip title="Add Asset">
+                  <Fab
+                    disabled={
+                      schema.type === "array" && schema?.maxItems && multiSelect && items.length >= schema.maxItems
+                    }
+                    onClick={handleAdd}
                     style={{ backgroundColor: "#ccc" }}
                   >
                     <AddIcon fontSize="large" style={{ color: "#fff" }} />

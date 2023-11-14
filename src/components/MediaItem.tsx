@@ -1,23 +1,23 @@
-import { Fab, Tooltip } from "@mui/material";
+import { Fab } from "@mui/material";
 import Chooser from "./Chooser";
 import ChooserActions from "./ChooserActions";
 import ImageCard from "./ImageCard";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DeleteIcon from "./DeleteIcon";
+import Tooltip from "./Tooltip";
 
 export function MediaItem({ item, config, handleRemove, handleReplace, ...other }) {
   return (
-    <Chooser {...other}>
-      <ImageCard
-        src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
-        label={item.name || ""}
-      />
-
-      <Tooltip title={item?.name} arrow placement="top" followCursor={true} enterDelay={800}>
-        <span>
+    <Tooltip title={item?.name}>
+      <div>
+        <Chooser {...other}>
+          <ImageCard
+            src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
+            label={item.name || ""}
+          />
           <ChooserActions>
-            <Tooltip title="Open in Bynder" arrow>
+            <Tooltip title="Open in Bynder">
               <Fab
                 onClick={() => {
                   window.open(
@@ -30,7 +30,7 @@ export function MediaItem({ item, config, handleRemove, handleReplace, ...other 
                 <OpenInNewIcon />
               </Fab>
             </Tooltip>
-            <Tooltip title="Swap Asset" arrow>
+            <Tooltip title="Swap Asset">
               <Fab
                 onClick={() => {
                   handleReplace();
@@ -39,14 +39,14 @@ export function MediaItem({ item, config, handleRemove, handleReplace, ...other 
                 <SwapHorizIcon />
               </Fab>
             </Tooltip>
-            <Tooltip title="Remove Asset" arrow>
+            <Tooltip title="Remove Asset">
               <Fab onClick={() => handleRemove(item)}>
                 <DeleteIcon />
               </Fab>
             </Tooltip>
           </ChooserActions>
-        </span>
-      </Tooltip>
-    </Chooser>
+        </Chooser>
+      </div>
+    </Tooltip>
   );
 }
