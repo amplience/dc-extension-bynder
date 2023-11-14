@@ -36,13 +36,7 @@ function BynderExtension() {
     theme: {
       colorButtonPrimary: "#3380FF",
     },
-    onSuccess: function (assets) {
-      const mappedAssets = contentMapping
-        ? assets?.map((asset) => serialize(contentMapper(asset, contentMapping)))
-        : assets;
-      updateItems(mappedAssets);
-      setOpenDialog(false);
-    },
+    onSuccess: undefined,
     onLogout: undefined,
     authentication: undefined,
   };
@@ -60,11 +54,18 @@ function BynderExtension() {
     setField(updatedItems);
   };
 
+  const replaceItem = (oldItem, newItem) => {
+    const modifiedItems = items.map((item) => (item.databaseId === oldItem.databaseId ? newItem : item));
+    setItems(modifiedItems);
+    setField(modifiedItems);
+  };
+
   const setField = (items) => {
+    const mappedItems = contentMapping ? items?.map((item) => serialize(contentMapper(item, contentMapping))) : items;
     if (multiSelectEnabled) {
-      sdk.field.setValue(items);
+      sdk.field.setValue(mappedItems);
     } else {
-      sdk.field.setValue(items[0] || null);
+      sdk.field.setValue(mappedItems[0] || null);
     }
   };
 
@@ -74,6 +75,25 @@ function BynderExtension() {
     (window as any).BynderCompactView.open({
       ...bynderConfig,
       selectedAssets,
+      onSuccess: (assets) => {
+        updateItems(assets);
+        setOpenDialog(false);
+      },
+    });
+  };
+
+  const handleReplaceOpenDialog = (item) => {
+    setOpenDialog(true);
+    (window as any).BynderCompactView.open({
+      ...bynderConfig,
+      selectedAssets: [item.databaseId],
+      mode: "SingleSelect",
+      onSuccess: (assets) => {
+        if (!assets[0]) {
+          return;
+        }
+        replaceItem(item, assets[0]);
+      },
     });
   };
 
@@ -91,9 +111,10 @@ function BynderExtension() {
           items={items}
           readOnly={sdk.readOnly}
           schema={sdk.field.schema}
-          onBrowse={handleOpenDialog}
+          onAdd={handleOpenDialog}
           onUpdate={updateItems}
           onRemove={removeItem}
+          onReplace={handleReplaceOpenDialog}
           multiSelect={multiSelectEnabled}
         />
       </div>

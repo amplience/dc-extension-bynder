@@ -15,14 +15,15 @@ export type ImageFieldProps = {
   schema?: any;
   readOnly?: boolean;
   style?: any;
-  onBrowse?: () => void;
+  onAdd?: (options) => void;
   onUpdate?: (items) => void;
   onRemove?: (id) => void;
+  onReplace?: (id) => void;
   multiSelect: boolean;
 };
 
 function BynderImageField(props: ImageFieldProps) {
-  const { items, schema, readOnly, onBrowse, multiSelect, onUpdate, onRemove, ...other } = props;
+  const { items, schema, readOnly, onAdd, multiSelect, onUpdate, onRemove, onReplace, ...other } = props;
 
   const sdk = useContentFieldExtension();
   const sensors = useSensors(
@@ -42,9 +43,15 @@ function BynderImageField(props: ImageFieldProps) {
     ...sdk.params.instance,
   };
 
-  const handleSelectImage = async () => {
+  const handleAdd = async () => {
     try {
-      onBrowse();
+      onAdd({});
+    } catch (err) {}
+  };
+
+  const handleReplace = async (item) => {
+    try {
+      onReplace(item);
     } catch (err) {}
   };
 
@@ -82,7 +89,7 @@ function BynderImageField(props: ImageFieldProps) {
                     item={item}
                     config={installedBynderConfig}
                     handleRemove={() => onRemove(item.databaseId)}
-                    handleSelectImage={handleSelectImage}
+                    handleReplace={() => handleReplace(item)}
                     {...other}
                   />
                 </SortableListItem>
@@ -95,7 +102,7 @@ function BynderImageField(props: ImageFieldProps) {
             item={items[0]}
             config={installedBynderConfig}
             handleRemove={() => onRemove(items[0].databaseId)}
-            handleSelectImage={handleSelectImage}
+            handleReplace={() => handleReplace(items[0])}
             {...other}
           />
         )}
@@ -103,8 +110,8 @@ function BynderImageField(props: ImageFieldProps) {
           <Box sx={{ mt: 1, ml: 1, mr: 1 }} style={{ position: "relative" }}>
             <Chooser {...other}>
               <AddAction>
-                <Tooltip title='Add Image' arrow>
-                  <Fab onClick={handleSelectImage} style={{ backgroundColor: "#ccc" }}>
+                <Tooltip title="Add Image" arrow>
+                  <Fab onClick={handleAdd} style={{ backgroundColor: "#ccc" }}>
                     <AddIcon fontSize="large" style={{ color: "#fff" }} />
                   </Fab>
                 </Tooltip>
