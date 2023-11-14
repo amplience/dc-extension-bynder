@@ -111,7 +111,10 @@ function BynderImageField(props: ImageFieldProps) {
             <Chooser {...other}>
               <AddAction>
                 <Tooltip title="Add Image" arrow>
-                  <Fab onClick={handleAdd} style={{ backgroundColor: "#ccc" }}>
+                                    <Fab disabled={schema?.maxItems && multiSelect && items.length >= schema.maxItems} 
+                    onClick={handleAdd} 
+                    style={{ backgroundColor: "#ccc" }}
+                  >
                     <AddIcon fontSize="large" style={{ color: "#fff" }} />
                   </Fab>
                 </Tooltip>
