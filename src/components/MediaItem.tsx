@@ -16,7 +16,7 @@ export function MediaItem({ item, config, handleRemove, handleSelectImage, ...ot
         label={item.name || ""}
       />
       
-        <Tooltip title={item?.name} arrow placement="top" followCursor={true}>
+        <Tooltip title={item?.name} arrow placement="top" followCursor={true} enterDelay={800}>
       <span>
       <ChooserActions>
         <Tooltip title='Open in Bynder' arrow>
