@@ -65,7 +65,7 @@ function BynderExtension() {
     if (multiSelectEnabled) {
       sdk.field.setValue(mappedItems);
     } else {
-      sdk.field.setValue(mappedItems[0]);
+      sdk.field.setValue(mappedItems[0] || null);
     }
   };
 

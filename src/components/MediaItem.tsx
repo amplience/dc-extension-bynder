@@ -8,40 +8,45 @@ import DeleteIcon from "./DeleteIcon";
 
 export function MediaItem({ item, config, handleRemove, handleReplace, ...other }) {
   return (
-    <Chooser {...other} title={item?.name}>
+    <Chooser {...other}>
       <ImageCard
         src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
         label={item.name || ""}
       />
-      <ChooserActions>
-        <Tooltip title="Open in Bynder" arrow>
-          <Fab
-            onClick={() => {
-              window.open(
-                `${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`,
-                "_blank",
-                "noreferrer",
-              );
-            }}
-          >
-            <OpenInNewIcon />
-          </Fab>
-        </Tooltip>
-        <Tooltip title="Swap Image" arrow>
-          <Fab
-            onClick={() => {
-              handleReplace();
-            }}
-          >
-            <SwapHorizIcon />
-          </Fab>
-        </Tooltip>
-        <Tooltip title="Remove Image" arrow>
-          <Fab onClick={() => handleRemove(item)}>
-            <DeleteIcon />
-          </Fab>
-        </Tooltip>
-      </ChooserActions>
+
+      <Tooltip title={item?.name} arrow placement="top" followCursor={true} enterDelay={800}>
+        <span>
+          <ChooserActions>
+            <Tooltip title="Open in Bynder" arrow>
+              <Fab
+                onClick={() => {
+                  window.open(
+                    `${item?.url || config.portal.url}/media/?mediaId=${item.databaseId}&viewType=grid`,
+                    "_blank",
+                    "noreferrer",
+                  );
+                }}
+              >
+                <OpenInNewIcon />
+              </Fab>
+            </Tooltip>
+            <Tooltip title="Swap Asset" arrow>
+              <Fab
+                onClick={() => {
+                  handleReplace();
+                }}
+              >
+                <SwapHorizIcon />
+              </Fab>
+            </Tooltip>
+            <Tooltip title="Remove Asset" arrow>
+              <Fab onClick={() => handleRemove(item)}>
+                <DeleteIcon />
+              </Fab>
+            </Tooltip>
+          </ChooserActions>
+        </span>
+      </Tooltip>
     </Chooser>
   );
 }
