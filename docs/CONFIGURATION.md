@@ -9,27 +9,41 @@ Bynder has a list of properties that can be sent to their asset browser to confi
 
 2. If Bynder release updates and new functionality then they can be taken advantage of without the requirement for Amplience to update the extension.
 
-Documentation: (See Optional options):
-
-TODO:
---Add Link
+Documentation: (See Optional options): [Bynder & WebDAM UI components](https://developer-docs.bynder.com/ui-components)
 
 You do not have to send any configuration options at all for this extension to function. The configuration options allow customers to aid usability and control the experience away from default behaviour.
 
 All attributes are customisable APART from any functions which include but may not be limited to:
 
 - onSuccess
-
 - onLogout
-
 - container
-
 - Authentication
 
 Options documented by Bynder at time of build of the extension are listed below directly from their documentation.
 
-TODO:
---Insert Table
+| **Attribute**                 | **Description**                                                                                                                                                                | **Possible Values**                                                    | **Default Value**                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- | --------------------------------------- |
+| onSuccess                     | Comma separated list of asset types to display                                                                                                                                 | function (assets: array(asset), additionalInfo?: AdditionalInfo): void | console.log                             |
+| container                     | A DOM element to act as the container for Compact View (disables modal)                                                                                                        | A Dom.HTMLElement instance                                             | None                                    |
+| portal                        | Portal config object                                                                                                                                                           | {url: string, editable: bool}                                          | None                                    |
+| portal.url                    | Set a default portal URL for the Compact View login screen (set on the Login component if using the [npm package](https://www.npmjs.com/package/@bynder/compact-view) package) | A string containing Bynder portal URL                                  | None                                    |
+| portal.editable               | If false, limits Compact View tot a single portal                                                                                                                              | true , false                                                           | true                                    |
+| defaultSearchTerm             | Set the initial value for search term                                                                                                                                          | "Keyword"                                                              | None                                    |
+| language                      | Set language for the Compact View                                                                                                                                              | "en_US", "nl_NL", "de_DE", "fr_FR", "es_ES"                            | "en_US"                                 |
+| mode                          | Set the Compact View to allow multiple or single asset selection                                                                                                               | "MultiSelect", "SingleSelect", "SingleSelectFile"                      | "SingleSelect"                          |
+| theme                         | A theme object for customizing Compact View look and feel                                                                                                                      |     Theme                                                              | None                                    |
+| assetTypes                    | An array of strings for limiting allowed asset types                                                                                                                           | AssetType[]                                                            | ["image", "audio", "video", "document"] |
+| assetFieldSelection           | A multiline string containing desired asset fields (see below)                                                                                                                 | String                                                                 | All fields                              |
+| hideExternalAccess            | If true, removes access to external DAM from assets and collections                                                                                                            | true, false                                                            | false                                   |
+| selectedAssets                | An array of asset ids. When mode is different than MultiSelect, the last id in the array will be selected                                                                      | ["id1", "id2", "id3"]                                                  | []                                      |
+| assetFilter                   | Predefined filters for UCV                                                                                                                                                     | AssetFilterJson                                                        | None                                    |
+| authentication                | Authentication config object. (set on the Login component if using the [npm package](https://www.npmjs.com/package/@bynder/compact-view) package)                              | { getAccessToken: () => '', hideLogout: false }                        | None                                    |
+| authentication.getAccessToken | Function to provide an OAuth access_token and bypass the authentication flow.                                                                                                  | () => ''                                                               | None                                    |
+| authentication.hideLogout     | If true, logout button will not be displayed. This property can only be used in combination with authentication.getAccessToken.                                                | true, false                                                            | false                                   |
+| hideLimitedUse                | If true, limited assets will be hidden for all users.                                                                                                                          | true, false                                                            | false                                   |
+| modalStyles                   | An object with css properties for modal window wrapper.                                                                                                                        | {"width": "100%"}                                                      | None                                    |
+| onLogout                      | Callback, will be fired after logout.                                                                                                                                          | () => void                                                             | None                                    |
 
 These properties for the configuration can be set in the installation parameters in the Amplience Extension Screen.
 
@@ -46,8 +60,7 @@ Schemas in Amplience will need to be updated to use the extension. This will be 
 
 Documentation: https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type
 
-TODO: 
---Insert Link
+[Registering and using extensions | Amplience Developer Portal](https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type)
 
 The extension will then replace the field.
 
@@ -55,18 +68,35 @@ The extension will then replace the field.
 
 This will be a a single object which can hold information for a single asset from Bynder:
 
-TODO: 
---Insert CodeBlock
+```json
+"bynderObject": {
+    "title": "Bynder Object",
+    "description": "A single reference to an item in Bynder",
+    "type": "object",
+    "properties": {},
+    "ui:extension": {
+        "name": "bynder"
+    }
+}
+```
 
 ### Multi select Schema Configuration
 
 This will be an Array of objects. Each object can hold information for a single asset in Bynder:
 
-TODO:
---Insert CodeBlock
+```json
+"bynderArray": {
+    "title": "Bynder Array",
+    "description": "A list of references to items in Bynder",
+    "type": "array",
+    "items": {},
+    "ui:extension": {
+        "name": "bynder"
+    }
+}
+```
 
-TODO:
---Insert Note
+> Note: These are the most basic forms of schema configuration. You can strongly type these if you prefer and enforce values. Strongly typing can be useful if consuming via our GQL API as you can then return only the fields that you require.
 
 ## Supported capabilities
 
@@ -75,33 +105,21 @@ TODO:
 In all configurations of this extension the customer will be able to:
 
 - Add an asset from Bynder into the content form
-
 - Remove an asset from Bynder into the content form
-
 - If an asset is already in the content form they will be able to swap that asset for another asset from Bynder
-
 - If an asset is already in the content form they will be able to click directly to the Bynder interface to view / edit the asset. Permissions for this are based on their permission in Bynder. Link will open in a new tab
-
 - See a card preview for selected assets
-
 - Have a hover tooltip for selected assets
 
 As a developer / setting up the extension you will be able to:
 
 - Pass through a Bynder configuration in the extension installation parameters. Common parameters are:
-
-- - Specifying a portal URL so that a user does not have to do this
-
-- - Changing the theme of action buttons
-
-- - Setting the locale of the UI for Bynder
-
-- - Setting the mode (Single Select / Multi Select)
-
-- - Limiting asset types the user can select (only images, or images and videos etc)
-
+  - Specifying a portal URL so that a user does not have to do this
+  - Changing the theme of action buttons
+  - Setting the locale of the UI for Bynder
+  - Setting the mode (Single Select / Multi Select)
+  - Limiting asset types the user can select (only images, or images and videos etc)
 - Enforce limitations of the Schema
-
 - Map root level fields from Bynder to attributes in the Amplience content form
 
 ### Single select
@@ -113,9 +131,7 @@ As a developer / setting up the extension you will be able to:
 In addition to the functionality mentioned in General, Multi Select views will also allow:
 
 - Drag and drop re-ordering of assets in the content form
-
 - If you have validation for maximum items in for the array in your schema - when you have reached the maximum you will not be able to add more unless you remove items to comply with your restrictions
-
 - Swapping an asset will swap a single item in place in the content form
 
 ## Access
@@ -128,26 +144,21 @@ This hosted URL will have the same SLA as the Amplience Back Office for uptime.
 Amplience will also make this extension publicly available in an Amplience Github repository. This gives customers:
 
 - Access to the code if they wish to customise
-
 - Ability to raise PRs if they wish to contribute
-
 - Additional developer documentation
-
 - Ability to fork, build and host themselves if they choose to
 
 Github URL: https://github.com/amplience/dc-extension-bynder
 
-TODO:
---Add Note
+> Note: any customisations made will be unsupported.
 
 ## Documentation
 
 All documentation will be surfaced on the github page for this extension which will be available publicly on release.
 
-Amplience may also put additional documentation on our documentation site found here: 
+Amplience may also put additional documentation on our documentation site found here: https://amplience.com/developers/docs/
 
-TODO:
---Add Link
+[Home | Amplience Developer Portal](https://amplience.com/developers/docs/)
 
 ## Out of scope
 
@@ -178,9 +189,7 @@ N Brown will need access to a Bynder account as per the prerequisites listed in 
 ### Content saved in Amplience
 
 - By default, we will store ALL information sent by Bynder when selecting an asset. This is because Bynder has not yet been implemented by N Brown group and Akamai, and we do not wish to limit options for the integration to be successful.
-
 - Once N Brown have decided on the information they require, they will be able to update their extension parameters and their content type schema with a contentMapping. This will enable N Brown to store the information that they require and minimise the payload to the front end.
-
 - Content Mapping will be available for all root level properties that are provided back from Bynder.
 
 ### Content rendering (Live, Visualisation and Preview)
@@ -194,9 +203,7 @@ Amplience will support this integration for the agreed functionality and scope i
 Support notes:
 
 - Amplience support team will be first line support and triage pull in resources for from Amplience where required
-
 - Information will be via the Amplience support desk
-
 - Any Bynder specific issues / feedback will be directed to Bynder support via the customer
 
 ## Feature requests
@@ -211,22 +218,23 @@ The Amplience product team has discretion on whether features will be put onto t
 
 This extension will be available on the Amplience Github on release.
 
-Amplience will also list this in the Amplience Marketplace found here: 
+Amplience will also list this in the Amplience Marketplace found here: [Marketplace | Amplience](https://amplience.com/marketplace/)
 
-TODO:
---Add Link
-
-Amplience will also contact Bynder to list on their integrations page found here: 
-
-TODO:
---Add Link
+Amplience will also contact Bynder to list on their integrations page found here: [Bynder Integration Marketplace | Bynder](https://marketplace.bynder.com/)
 
 ## Timeline
 
 This is an indicative timeline for this integration:
 
-TODO:
---Add Table
+| **Date**          | **Action**                                                                                                                                                                                                                                                                                                              | **Status**  |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| 30/10/2023        | Initial Integration call with Nick Allen. Further meeting required with broader N Brown team [https://amplience.sharepoint.com/:v:/s/EMEApresales/EdJpqzlqReJEkFj_5mgJvGUBYz7J_zAVeL-fxhgKedbx9A?e=zXDNgw](https://amplience.sharepoint.com/:v:/s/EMEApresales/EdJpqzlqReJEkFj_5mgJvGUBYz7J_zAVeL-fxhgKedbx9A?e=zXDNgw) | COMPLETE    |
+| 06/11/2023        | Meeting with broader N Brown team to discuss and align on requirements. Also to answer any questions                                                                                                                                                                                                                    | COMPLETE    |
+| 07/11/2023        | Amplience approval for working on integration from CEO, CRO & CTO. Investigation and PoC started                                                                                                                                                                                                                        | In Progress |
+| 14/11/2023        | Scope document delivered to N Brown Group for review                                                                                                                                                                                                                                                                    | COMPLETE    |
+| 17/11/2023        | WIP access for N Brown to POC                                                                                                                                                                                                                                                                                           |             |
+| 20/11/2023        | Critical feedback provided from N Brown to Amplience                                                                                                                                                                                                                                                                    |             |
+| w/c 20th November | Anticipated week of release depending on critical feedback from N Brown. This will be the github and hosted URL release. Further marketplace releases / additional docs will happen after this but not affect project                                                                                                   | In Progress |
 
 ## Early access
 
@@ -237,10 +245,3 @@ WIP URL: https://bynder.extensions.content.amplience-qa.net
 Documentation will be shared as and when available.
 
 Github will remain private until release.
-
-## Reference Material (for project scoping)
-
-Miro Board when discussing integration with N Brown: https://miro.com/app/board/uXjVNUl7PDE=/
-
-TODO:
---Add Miro warning
