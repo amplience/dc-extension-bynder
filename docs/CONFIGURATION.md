@@ -51,8 +51,16 @@ Documentation: https://amplience.com/developers/docs/integrations/extensions/reg
 
 The format will be:
 
-TODO:
---Insert CodeBlock
+```json
+{
+  "bynderConfig":{
+    // Bynder configuration properties
+  },
+  "amplienceConfig":{
+    // Amplience configuration properties
+  }
+}
+```
 
 ## Schema Configuration
 
