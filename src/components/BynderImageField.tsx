@@ -13,6 +13,7 @@ import Tooltip from "./Tooltip";
 
 export type ImageFieldProps = {
   items: any;
+  cardImages: string[];
   schema?: any;
   readOnly?: boolean;
   style?: any;
@@ -24,7 +25,7 @@ export type ImageFieldProps = {
 };
 
 function BynderImageField(props: ImageFieldProps) {
-  const { items, schema, readOnly, onAdd, multiSelect, onUpdate, onRemove, onReplace, ...other } = props;
+  const { items, cardImages, schema, readOnly, onAdd, multiSelect, onUpdate, onRemove, onReplace, ...other } = props;
 
   const sdk = useContentFieldExtension();
   const sensors = useSensors(
@@ -88,6 +89,7 @@ function BynderImageField(props: ImageFieldProps) {
                 <SortableListItem id={item.databaseId} key={item.databaseId}>
                   <MediaItem
                     item={item}
+                    cardImages={cardImages}
                     config={installedBynderConfig}
                     handleRemove={() => onRemove(item.databaseId)}
                     handleReplace={() => handleReplace(item)}
@@ -101,6 +103,7 @@ function BynderImageField(props: ImageFieldProps) {
         {!multiSelect && items.length > 0 && (
           <MediaItem
             item={items[0]}
+            cardImages={cardImages}
             config={installedBynderConfig}
             handleRemove={() => onRemove(items[0].databaseId)}
             handleReplace={() => handleReplace(items[0])}
