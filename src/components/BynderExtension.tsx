@@ -6,8 +6,9 @@ import { ContentMapping, contentMapper } from "../utils/content-mapper";
 import { normaliseInitialValue } from "../utils/initial-value";
 import { FieldDetails } from "./FieldDetails";
 
-enum Modes {
+enum Mode {
   SingleSelect = "SingleSelect",
+  SingleSelectFile = "SingleSelectFile",
   MultiSelect = "MultiSelect",
 }
 
@@ -27,6 +28,7 @@ function BynderExtension() {
     files: { jsonPath: "$.files" },
     databaseId: { jsonPath: "$.databaseId" },
     url: { jsonPath: "$.url" },
+    additionalInfo: { jsonPath: "$.additionalInfo" },
   };
 
   const contentMapping: ContentMapping = amplienceConfig?.contentMapping
@@ -46,7 +48,7 @@ function BynderExtension() {
     authentication: undefined,
   };
 
-  const multiSelectEnabled = bynderConfig.mode === Modes.MultiSelect;
+  const multiSelectEnabled = bynderConfig.mode === Mode.MultiSelect;
 
   const cardImages: string[] = amplienceConfig?.cardImages;
 
@@ -57,14 +59,12 @@ function BynderExtension() {
 
   const removeItem = (id) => {
     const updatedItems = items.filter((item) => item.databaseId !== id);
-    setItems(updatedItems);
-    setField(updatedItems);
+    updateItems(updatedItems);
   };
 
   const replaceItem = (oldItem, newItem) => {
     const modifiedItems = items.map((item) => (item.databaseId === oldItem.databaseId ? newItem : item));
-    setItems(modifiedItems);
-    setField(modifiedItems);
+    updateItems(modifiedItems);
   };
 
   const setField = async (items) => {
@@ -80,14 +80,21 @@ function BynderExtension() {
     }
   };
 
+  const mergeAdditionalInfo = (assets, additionalInfo) => {
+    return assets.map((asset) => ({
+      ...asset,
+      ...(additionalInfo?.selectedFile ? { additionalInfo: { selectedFile: additionalInfo.selectedFile } } : {}),
+    }));
+  };
+
   const handleOpenDialog = () => {
     setOpenDialog(true);
     const selectedAssets = items.map((item) => item.databaseId);
     (window as any).BynderCompactView.open({
       ...bynderConfig,
       selectedAssets,
-      onSuccess: (assets) => {
-        updateItems(assets);
+      onSuccess: (assets, additionalInfo) => {
+        updateItems(mergeAdditionalInfo(assets, additionalInfo));
         setOpenDialog(false);
       },
     });
@@ -98,12 +105,14 @@ function BynderExtension() {
     (window as any).BynderCompactView.open({
       ...bynderConfig,
       selectedAssets: [item.databaseId],
-      mode: Modes.SingleSelect,
-      onSuccess: (assets) => {
-        if (!assets[0]) {
+      mode:
+        !multiSelectEnabled && bynderConfig.mode === Mode.SingleSelectFile ? Mode.SingleSelectFile : Mode.SingleSelect,
+      onSuccess: (assets, additionalInfo) => {
+        if (!Array.isArray(assets) || assets.length === 0) {
           return;
         }
-        replaceItem(item, assets[0]);
+        replaceItem(item, mergeAdditionalInfo(assets, additionalInfo)[0]);
+        setOpenDialog(false);
       },
     });
   };
