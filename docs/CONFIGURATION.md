@@ -183,7 +183,7 @@ Amplience may also put additional documentation on our documentation site found 
 
 [Home | Amplience Developer Portal](https://amplience.com/developers/docs/)
 
-## Out of scope
+## Out-of-scope
 
 The following items are out-of-scope for this integration with Bynder.
 
