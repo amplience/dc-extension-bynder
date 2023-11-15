@@ -30,10 +30,10 @@ You do not have to send any configuration options at all for this extension to f
 
 All attributes are customisable APART from any functions which include but may not be limited to:
 
-- onSuccess
-- onLogout
-- container
-- Authentication
+- `onSuccess`
+- `onLogout`
+- `container`
+- `Authentication`
 
 Options documented by Bynder at time of build of the extension are listed below directly from their documentation.
 
