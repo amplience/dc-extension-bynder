@@ -39,9 +39,6 @@ function BynderExtension() {
 
   const bynderConfig = {
     ...(installedBynderConfig ? installedBynderConfig : {}),
-    theme: {
-      colorButtonPrimary: "#3380FF",
-    },
     onSuccess: undefined,
     onLogout: undefined,
     authentication: undefined,
