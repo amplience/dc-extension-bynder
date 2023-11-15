@@ -33,7 +33,7 @@ All attributes are customisable APART from any functions which include but may n
 - `onSuccess`
 - `onLogout`
 - `container`
-- `Authentication`
+- `authentication`
 
 Options documented by Bynder at time of build of the extension are listed below directly from their documentation.
 
