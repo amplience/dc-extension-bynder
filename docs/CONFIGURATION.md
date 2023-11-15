@@ -176,36 +176,6 @@ The following items are out-of-scope for this integration with Bynder.
 
 6. SSO / OAUTH is out of scope for using the extension. User will login into Bynder using their credentials as this also gives the right permissions for the right user.
 
-## N Brown Specifics
-
-These are details specific to for N Brown implementation which may be useful.
-
-### Commercial
-
-This integration will be developed at no cost to N Brown Group. Amplience will build and support this integration as per the scope.
-
-N Brown will need access to a Bynder account as per the prerequisites listed in this document to use.
-
-### Content saved in Amplience
-
-- By default, we will store ALL information sent by Bynder when selecting an asset. This is because Bynder has not yet been implemented by N Brown group and Akamai, and we do not wish to limit options for the integration to be successful.
-- Once N Brown have decided on the information they require, they will be able to update their extension parameters and their content type schema with a contentMapping. This will enable N Brown to store the information that they require and minimise the payload to the front end.
-- Content Mapping will be available for all root level properties that are provided back from Bynder.
-
-### Content rendering (Live, Visualisation and Preview)
-
-As N Brown plan on serving media from Akamai all rendering of the content should point to URLs from Akamai so that users of the CMS have the most accurate preview when creating content.
-
-## Support
-
-Amplience will support this integration for the agreed functionality and scope in this document. This included the uptime of the hosted URL of this extension.
-
-Support notes:
-
-- Amplience support team will be first line support and triage pull in resources for from Amplience where required
-- Information will be via the Amplience support desk
-- Any Bynder specific issues / feedback will be directed to Bynder support via the customer
-
 ## Feature requests
 
 We welcome feature requests at Amplience as they enhance the product for all customers. This can be via the feedback bot in the Amplience Dynamic Content interface, via support, via your implementation team (Expert Services), or via your account manager & customer success manager.
@@ -221,27 +191,3 @@ This extension will be available on the Amplience Github on release.
 Amplience will also list this in the Amplience Marketplace found here: [Marketplace | Amplience](https://amplience.com/marketplace/)
 
 Amplience will also contact Bynder to list on their integrations page found here: [Bynder Integration Marketplace | Bynder](https://marketplace.bynder.com/)
-
-## Timeline
-
-This is an indicative timeline for this integration:
-
-| **Date**          | **Action**                                                                                                                                                                                                                                                                                                              | **Status**  |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| 30/10/2023        | Initial Integration call with Nick Allen. Further meeting required with broader N Brown team | COMPLETE    |
-| 06/11/2023        | Meeting with broader N Brown team to discuss and align on requirements. Also to answer any questions                                                                                                                                                                                                                    | COMPLETE    |
-| 07/11/2023        | Amplience approval for working on integration from CEO, CRO & CTO. Investigation and PoC started                                                                                                                                                                                                                        | In Progress |
-| 14/11/2023        | Scope document delivered to N Brown Group for review                                                                                                                                                                                                                                                                    | COMPLETE    |
-| 17/11/2023        | WIP access for N Brown to POC                                                                                                                                                                                                                                                                                           |             |
-| 20/11/2023        | Critical feedback provided from N Brown to Amplience                                                                                                                                                                                                                                                                    |             |
-| w/c 20th November | Anticipated week of release depending on critical feedback from N Brown. This will be the github and hosted URL release. Further marketplace releases / additional docs will happen after this but not affect project                                                                                                   | In Progress |
-
-## Early access
-
-Amplience will provide early access to N Brown group so that they can validate early that the solution will work for them.
-
-WIP URL: https://bynder.extensions.content.amplience-qa.net
-
-Documentation will be shared as and when available.
-
-Github will remain private until release.
