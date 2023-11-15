@@ -1,5 +1,6 @@
 import { init, ContentFieldExtension } from "dc-extensions-sdk";
 import { createContext, useContext, useEffect, useState } from "react";
+import { normaliseInitialValue } from "../utils/initial-value";
 
 export type ContentFieldExtensionContextState = ContentFieldExtension & {
   initialValue: any;
@@ -40,7 +41,7 @@ function WithContentFieldExtension({ children, pollForm = true }) {
     init().then((sdk: ContentFieldExtension) => {
       setReadOnly(sdk.form.readOnly);
       sdk.field.getValue().then((value) => {
-        setInitialValue(value);
+        setInitialValue(normaliseInitialValue(value));
         setSDK(sdk);
         setTitle(sdk.field.schema?.title);
         setDescription(sdk.field.schema?.description);

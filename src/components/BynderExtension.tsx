@@ -3,7 +3,6 @@ import { useContentFieldExtension } from "./WithFieldExtension";
 import BynderImageField from "./BynderImageField";
 import { serialize } from "../utils/serialize";
 import { ContentMapping, contentMapper } from "../utils/content-mapper";
-import { normaliseInitialValue } from "../utils/initial-value";
 import { FieldDetails } from "./FieldDetails";
 
 enum Modes {
@@ -14,7 +13,7 @@ enum Modes {
 function BynderExtension() {
   const sdk = useContentFieldExtension();
   const [openDialog, setOpenDialog] = useState(false);
-  const [items, setItems] = useState(normaliseInitialValue(sdk.initialValue));
+  const [items, setItems] = useState(sdk.initialValue);
 
   // @ts-ignore
   const { bynderConfig: installedBynderConfig, amplienceConfig } = {
