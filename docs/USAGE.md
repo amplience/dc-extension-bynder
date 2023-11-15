@@ -1,5 +1,7 @@
 # dc-extension-bynder
 
+## Table of Contents
+
 - [Using the extension](#using-the-extension)
 - [Usage flow](#usage-flow)
 
