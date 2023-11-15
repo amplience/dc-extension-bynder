@@ -6,6 +6,11 @@ import { ContentMapping, contentMapper } from "../utils/content-mapper";
 import { normaliseInitialValue } from "../utils/initial-value";
 import { FieldDetails } from "./FieldDetails";
 
+enum Modes {
+  SingleSelect = "SingleSelect",
+  MultiSelect = "MultiSelect",
+}
+
 function BynderExtension() {
   const sdk = useContentFieldExtension();
   const [openDialog, setOpenDialog] = useState(false);
@@ -41,7 +46,7 @@ function BynderExtension() {
     authentication: undefined,
   };
 
-  const multiSelectEnabled = bynderConfig.mode === "MultiSelect";
+  const multiSelectEnabled = bynderConfig.mode === Modes.MultiSelect;
 
   const cardImages: string[] = amplienceConfig?.cardImages;
 
@@ -62,12 +67,16 @@ function BynderExtension() {
     setField(modifiedItems);
   };
 
-  const setField = (items) => {
-    const mappedItems = contentMapping ? items?.map((item) => serialize(contentMapper(item, contentMapping))) : items;
-    if (multiSelectEnabled) {
-      sdk.field.setValue(mappedItems);
-    } else {
-      sdk.field.setValue(mappedItems[0] || null);
+  const setField = async (items) => {
+    try {
+      const mappedItems = contentMapping ? items?.map((item) => serialize(contentMapper(item, contentMapping))) : items;
+      if (multiSelectEnabled) {
+        await sdk.field.setValue(mappedItems);
+      } else {
+        await sdk.field.setValue(mappedItems[0] || null);
+      }
+    } catch (e) {
+      // noop - validation errors handled in DC
     }
   };
 
@@ -89,7 +98,7 @@ function BynderExtension() {
     (window as any).BynderCompactView.open({
       ...bynderConfig,
       selectedAssets: [item.databaseId],
-      mode: "SingleSelect",
+      mode: Modes.SingleSelect,
       onSuccess: (assets) => {
         if (!assets[0]) {
           return;
