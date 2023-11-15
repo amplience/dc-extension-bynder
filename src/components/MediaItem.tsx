@@ -22,7 +22,7 @@ export function MediaItem({ item, cardImages = [], config, handleRemove, handleR
         break;
       }
     }
-  }, [item]);
+  }, [cardImages, item]);
 
   return (
     <Tooltip title={item?.name}>
