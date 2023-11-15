@@ -1,7 +1,22 @@
 # dc-extension-bynder
 
-TODO:
---Contents List
+## Table of Contents
+
+- [Extension Configuration](#extension-configuration)
+- [Schema Configuration](#schema-configuration)
+  - [Single select Schema configuration](#single-select-schema-configuration)
+  - [Multi select Schema Configuration](#multi-select-schema-configuration)
+- [Supported capabilities](#supported-capabilities)
+  - [General](#general)
+  - [Single select](#single-select)
+  - [Multi select](#multi-select)
+- [Access](#access)
+- [Documentation](#documentation)
+- [Out of scope](#out-of-scope)
+- [Feature requests](#feature-requests)
+- [Public listings  ](#public-listings)
+
+## Extension configuration
 
 Bynder has a list of properties that can be sent to their asset browser to configure the user experience. Instead of limiting these, Amplience will enable these to be configured in the installation parameters of the extension to enable customers to:
 
