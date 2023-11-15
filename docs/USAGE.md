@@ -1,7 +1,7 @@
 # dc-extension-bynder
 
-Using the extension
-Usage flow
+- [Using the extension](#using-the-extension)
+- [Usage flow](#usage-flow)
 
 ## Using the extension
 
