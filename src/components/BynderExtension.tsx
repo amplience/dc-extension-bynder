@@ -12,7 +12,7 @@ function BynderExtension() {
   const [items, setItems] = useState(normaliseInitialValue(sdk.initialValue));
 
   // @ts-ignore
-  const { bynderConfig: installedBynderConfig, contentMapping: installedMappings } = {
+  const { bynderConfig: installedBynderConfig, amplienceConfig } = {
     ...sdk.params.installation,
     ...sdk.params.instance,
   };
@@ -24,9 +24,9 @@ function BynderExtension() {
     url: { jsonPath: "$.url" },
   };
 
-  const contentMapping: ContentMapping = installedMappings
+  const contentMapping: ContentMapping = amplienceConfig?.contentMapping
     ? {
-        ...installedMappings,
+        ...amplienceConfig?.contentMapping,
         ...defaultMapping,
       }
     : null;
