@@ -6,14 +6,30 @@ import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DeleteIcon from "./DeleteIcon";
 import Tooltip from "./Tooltip";
+import { useEffect, useState } from "react";
 
-export function MediaItem({ item, config, handleRemove, handleReplace, ...other }) {
+const defaultDerivatives = ["webImage", "thumbnail", "mini"];
+
+export function MediaItem({ item, cardImages = [], config, handleRemove, handleReplace, ...other }) {
+  const [finalCardImage, setFinalCardImage] = useState(item?.originalUrl);
+  cardImages = [...cardImages, ...defaultDerivatives];
+
+  useEffect(() => {
+    // Get card image using fallback
+    for (var i = 0; i < cardImages.length; ++i) {
+      if (item?.files[cardImages[i]]?.url) {
+        setFinalCardImage(item.files[cardImages[i]].url);
+        break;
+      }
+    }
+  }, [cardImages, item]);
+
   return (
     <Tooltip title={item?.name}>
       <div>
         <Chooser {...other}>
           <ImageCard
-            src={`${item?.files?.webImage?.url || item?.files?.thumbnail?.url || item?.originalUrl}`}
+            src={finalCardImage}
             label={item.name || ""}
           />
           <ChooserActions>

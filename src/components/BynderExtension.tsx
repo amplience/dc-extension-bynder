@@ -43,6 +43,8 @@ function BynderExtension() {
 
   const multiSelectEnabled = bynderConfig.mode === "MultiSelect";
 
+  const cardImages: string[] = amplienceConfig?.cardImages;
+
   const updateItems = (items) => {
     setItems(items);
     setField(items);
@@ -109,6 +111,7 @@ function BynderExtension() {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <BynderImageField
           items={items}
+          cardImages={cardImages}
           readOnly={sdk.readOnly}
           schema={sdk.field.schema}
           onAdd={handleOpenDialog}
