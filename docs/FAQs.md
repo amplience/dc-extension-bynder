@@ -22,9 +22,9 @@ A. If SingleSelect or SingleSelectFile are set in the Installation Parameters, o
 
 - Q. What is the difference between SingleSelect and SingleSelectFile?
 
-A. SingleSelect allows a user to add one Asset to a Content Item. SingleSelectFile does likewise but also offers the choice of assigning Media Image, Mini ot Thumbnail image options.
+A. SingleSelect allows a user to add one Asset to a Content Item. SingleSelectFile does likewise but also offers the choice of assigning different Derivatives image options (for instance Web Image, Mini, Thumbnail, etc.).
 
-- Q. Can I swap Assets.
+- Q. Can I swap Assets?
 
 A. Yes. Locate the Asset you wish to swap and hover over that Asset. You will see a swap icon. Choose the icon and you can replace the preselected Asset with another of your choice. This can be used in any mode function - SingleSelect, SingleSelectFile and MultiSelect.
 
