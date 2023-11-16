@@ -1,5 +1,15 @@
 # dc-extension-bynder
 
+## Prerequisites 
+
+In order to use this integration you must have the following:
+
+- An Amplience account with access to the Dynamic Content Platform.
+
+- - To install the extension and use in schemas / content types you must have Developer permissions role or higher
+
+- A Bynder (WebDAM) account setup with any Bynder pre-requisites to use Universal Compact View
+
 ## Table of Contents
 
 - [Using the extension](#using-the-extension)
@@ -12,6 +22,7 @@ This document provides details of how to use the integration between Amplienceâ€
 Alternatively, return to [README.md](../README.md) for more information on the extension.
 
 ### Usage flow
+
 Below are illustrative examples of how this extension will function for the end user. 
 
 Figure 1: Shows that the extension will be a field extension in Amplience (Green box). You can have other standard fields in the content type in conjunction with this extension providing they are outside of the field that the extension overwrites the UI for.
