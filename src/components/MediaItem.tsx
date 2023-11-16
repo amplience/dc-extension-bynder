@@ -6,32 +6,17 @@ import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DeleteIcon from "./DeleteIcon";
 import Tooltip from "./Tooltip";
-import { useEffect, useState } from "react";
 
 const defaultDerivatives = ["webImage", "thumbnail", "mini"];
 
 export function MediaItem({ item, cardImages = [], config, handleRemove, handleReplace, ...other }) {
-  const [finalCardImage, setFinalCardImage] = useState(item?.originalUrl);
-  cardImages = [...cardImages, ...defaultDerivatives];
-
-  useEffect(() => {
-    // Get card image using fallback
-    for (var i = 0; i < cardImages.length; ++i) {
-      if (item?.files[cardImages[i]]?.url) {
-        setFinalCardImage(item.files[cardImages[i]].url);
-        break;
-      }
-    }
-  }, [cardImages, item]);
+  const cardImage = [...cardImages, ...defaultDerivatives].find((images) => item?.files[images]);
 
   return (
     <Tooltip title={item?.name}>
       <div>
         <Chooser {...other}>
-          <ImageCard
-            src={finalCardImage}
-            label={item.name || ""}
-          />
+          <ImageCard src={item?.files[cardImage]?.url ?? item?.originalUrl} label={item.name || ""} />
           <ChooserActions>
             <Tooltip title="Open in Bynder">
               <Fab
