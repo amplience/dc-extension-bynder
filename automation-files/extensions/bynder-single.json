@@ -1,0 +1,17 @@
+{
+  "name": "bynder-single",
+  "label": "Bynder Single",
+  "description": "",
+  "url": "https://bynder.extensions.content.amplience-qa.net",
+  "height": 200,
+  "enabledForAllContentTypes": false,
+  "category": "CONTENT_FIELD",
+  "parameters": "{\n    \"bynderConfig\":{\n        \"mode\": \"SingleSelect\"\n    }\n}",
+  "snippets": [],
+  "settings": "{\"API\":{\"READ\":true,\"EDIT\":true},\"SANDBOX\":{\"SAME_ORIGIN\":true,\"MODALS\":true,\"NAVIGATION\":true,\"POPUPS\":true,\"POPUP_ESCAPE_SANDBOX\":true,\"DOWNLOADS\":true,\"FORMS\":true}}",
+  "status": "ACTIVE",
+  "createdBy": "df984790-5cf9-4b6e-96a0-3a0ea9475b64",
+  "createdDate": "2023-11-16T09:43:17.559Z",
+  "lastModifiedBy": "df984790-5cf9-4b6e-96a0-3a0ea9475b64",
+  "lastModifiedDate": "2023-11-16T10:22:16.528Z"
+}

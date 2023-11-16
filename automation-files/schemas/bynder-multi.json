@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/bynder-multi-schema.json",
+  "schemaId": "https://amplience.com/content/bynder/multi-select",
+  "validationLevel": "CONTENT_TYPE"
+}

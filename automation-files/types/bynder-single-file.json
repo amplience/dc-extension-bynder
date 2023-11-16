@@ -1,0 +1,19 @@
+{
+  "contentTypeUri": "https://amplience.com/content/bynder/single-select-file",
+  "status": "ACTIVE",
+  "settings": {
+    "label": "Bynder Single File",
+    "icons": [],
+    "visualizations": [
+      {
+        "label": "JSON",
+        "templatedUri": "https://delivery-preview.visualizations.content.amplience.net?id={{content.sys.id}}&vse={{vse.domain}}&locale={{locales}}&hub=nmdemostore&realtime=true",
+        "default": true
+      }
+    ],
+    "cards": []
+  },
+  "repositories": [
+    "content"
+  ]
+}

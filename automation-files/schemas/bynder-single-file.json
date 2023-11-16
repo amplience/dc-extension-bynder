@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/bynder-single-file-schema.json",
+  "schemaId": "https://amplience.com/content/bynder/single-select-file",
+  "validationLevel": "CONTENT_TYPE"
+}
