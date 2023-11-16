@@ -4,6 +4,7 @@ import BynderImageField from "./BynderImageField";
 import { serialize } from "../utils/serialize";
 import { ContentMapping, contentMapper } from "../utils/content-mapper";
 import { FieldDetails } from "./FieldDetails";
+import AlertDialog from "./AlertDialog";
 
 enum Mode {
   SingleSelect = "SingleSelect",
@@ -14,7 +15,19 @@ enum Mode {
 function BynderExtension() {
   const sdk = useContentFieldExtension();
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDuplicateDialog, setOpenDuplicateDialog] = useState(false);
+  const [duplicate, setDuplicate] = useState(null);
   const [items, setItems] = useState(sdk.initialValue);
+
+  const handleOpenDuplicateDialog = (item, index) => {
+    setDuplicate({ name: item.name, index });
+    setOpenDuplicateDialog(true);
+  };
+
+  const handleCloseDuplicateDialog = () => {
+    setOpenDuplicateDialog(false);
+    setDuplicate(null);
+  };
 
   // @ts-ignore
   const { bynderConfig: installedBynderConfig, amplienceConfig } = {
@@ -59,6 +72,11 @@ function BynderExtension() {
   };
 
   const replaceItem = (oldItem, newItem) => {
+    const existingItemIndex = items.findIndex((item) => item.databaseId === newItem.databaseId);
+    if (oldItem.databaseId !== newItem.databaseId && existingItemIndex !== -1) {
+      handleOpenDuplicateDialog(newItem, existingItemIndex);
+      return;
+    }
     const modifiedItems = items.map((item) => (item.databaseId === oldItem.databaseId ? newItem : item));
     updateItems(modifiedItems);
   };
@@ -96,18 +114,18 @@ function BynderExtension() {
     });
   };
 
-  const handleReplaceOpenDialog = (item) => {
+  const handleReplaceOpenDialog = (oldItem) => {
     setOpenDialog(true);
     (window as any).BynderCompactView.open({
       ...bynderConfig,
-      selectedAssets: [item.databaseId],
+      selectedAssets: [oldItem.databaseId],
       mode:
         !multiSelectEnabled && bynderConfig.mode === Mode.SingleSelectFile ? Mode.SingleSelectFile : Mode.SingleSelect,
       onSuccess: (assets, additionalInfo) => {
         if (!Array.isArray(assets) || assets.length === 0) {
           return;
         }
-        replaceItem(item, mergeAdditionalInfo(assets, additionalInfo)[0]);
+        replaceItem(oldItem, mergeAdditionalInfo(assets, additionalInfo)[0]);
         setOpenDialog(false);
       },
     });
@@ -135,6 +153,12 @@ function BynderExtension() {
           multiSelect={multiSelectEnabled}
         />
       </div>
+      <AlertDialog
+        open={openDuplicateDialog}
+        handleClose={handleCloseDuplicateDialog}
+        title={"Item is already in your list"}
+        text={`"${duplicate?.name}" has already been selected in position ${duplicate?.index + 1}`}
+      />
     </div>
   );
 }
