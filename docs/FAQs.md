@@ -18,7 +18,7 @@ A. Yes. The language can be selected in the Bynder Config under the extensions's
 
 - Q. How many Assets can I add to a Content Item?
 
-A. If SingleSelect or SingleSelectFile are set in the Installation Parameters, only one Asset per Content Item can be selected. If MultiSelect is chosen, the minimum and maximum number of Assets that can be added is defined in teh Content Type Schema.
+A. If SingleSelect or SingleSelectFile are set in the Installation Parameters, only one Asset per Content Item can be selected. If MultiSelect is chosen, the minimum and maximum number of Assets that can be added is defined in the Content Type Schema.
 
 - Q. What is the difference between SingleSelect and SingleSelectFile?
 
@@ -30,10 +30,10 @@ A. Yes. Locate the Asset you wish to swap and hover over that Asset. You will se
 
 - Q. Can I reorder Assets in a Content Item?
 
-A. Yes. Youc an drag-and-drop an Asset from one location to another.
+A. Yes. You can drag-and-drop an Asset from one location to another.
 
 ## Hosting
 
 - Q. Can I fork this extension so I have full control?
 
-A. Yes. Full details are available on the [HOSTING.md](HOSTING.md) document.
+A. Yes. Full details are available in the [HOSTING.md](HOSTING.md) document.
