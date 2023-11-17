@@ -12,7 +12,7 @@ Automation:
 
  - Content Type Schemas
  - Content Types
- - Extensions (Bynder)
+ - Extensions (Bynder) + Snippets
  - Default Icons
  - Default Cards
  - Default Visualisation (JSON Preview)
