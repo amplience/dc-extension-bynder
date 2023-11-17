@@ -84,6 +84,7 @@ The mode can either be `SingleSelect` or `MultiSelect` if you want to choose mor
 It's also possible to use content mapping to get and rename the properties you need for the extension, using JSON Path.
 
 ## 🌍 Useful Links
+-   [Automation](./docs/AUTOMATION.md)
 -   [Contributing](./CONTRIBUTING.md)
 -   [Support](./support.md)
 -   [Licensing](./LICENSE)

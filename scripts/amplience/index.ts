@@ -2,5 +2,3 @@
 
 import cli from './cli';
 cli();
-
-export{}
