@@ -1,7 +1,7 @@
 {
   "name": "bynder-multi",
   "label": "Bynder Multi",
-  "description": "",
+  "description": "An example Bynder extension configured for multi-select",
   "url": "https://bynder.extensions.content.amplience-qa.net",
   "height": 200,
   "enabledForAllContentTypes": false,

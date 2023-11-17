@@ -1,7 +1,7 @@
 {
   "name": "bynder-single",
   "label": "Bynder Single",
-  "description": "",
+  "description": "An example Bynder extension configured for single-select",
   "url": "https://bynder.extensions.content.amplience-qa.net",
   "height": 200,
   "enabledForAllContentTypes": false,
