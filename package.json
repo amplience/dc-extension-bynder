@@ -30,7 +30,7 @@
     "prepare-patch-release": "run-s build version:patch",
     "prepare-minor-release": "run-s build version:minor",
     "prepare-major-release": "run-s build version:major",
-    "import": "ts-node scripts/amplience/index.ts import"
+    "import": "ts-node --project tsconfig.scripts.json scripts/amplience/index.ts import"
   },
   "eslintConfig": {
     "extends": [

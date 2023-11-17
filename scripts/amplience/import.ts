@@ -99,7 +99,7 @@ export const importArgs = (yargs: Argv) => {
             type: 'string'
         })
         .option('schemaBaseUri', {
-            describe: 'mapFile',
+            describe: 'schemaBaseUri',
             default: 'https://demostore.amplience.com',
             type: 'string'
         })
@@ -147,6 +147,7 @@ export const importHandler = async (context: Arguments<Context>): Promise<any> =
                 --sync`,
             {stdio: 'inherit'}
         )
+
 
         console.log(`Done!`)
     } finally {
