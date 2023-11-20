@@ -54,7 +54,9 @@ function BynderExtension() {
     ...(installedBynderConfig ? installedBynderConfig : {}),
     onSuccess: undefined,
     onLogout: undefined,
-    authentication: undefined,
+    authentication: installedBynderConfig?.authentication?.token
+      ? { getAccessToken: () => installedBynderConfig?.authentication?.token }
+      : undefined,
   };
 
   const multiSelectEnabled = bynderConfig.mode === Mode.MultiSelect;
