@@ -33,6 +33,10 @@ This section presents example schemas for the various select possibilities.
 }
 ```
 
+Resulting content item:
+
+![Bynder Single Select](./../media/bynder-single-select-content.png)
+
 ### Single Select File schema
 
 ```json
@@ -62,6 +66,10 @@ This section presents example schemas for the various select possibilities.
 	"propertyOrder": []
 }
 ```
+
+Resulting content item:
+
+![Bynder Single Select File](./../media/bynder-single-select-file-content.png)
 
 ### Multi Select
 
@@ -94,3 +102,7 @@ This section presents example schemas for the various select possibilities.
 	"propertyOrder": []
 }
 ```
+
+Resulting content item:
+
+![Bynder Multi Select](./../media/bynder-multi-select-content.png)
