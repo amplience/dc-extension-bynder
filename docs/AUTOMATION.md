@@ -46,7 +46,7 @@ If you have a different setup, or would like to apply this to multiple repositor
 4. Save the files and run the automation
 
 ## Running the automation
-The files in `automation-files` are content types and content type schemas that allow you to configure a Stylitics widget using Amplience content items. The folder also includes example content items that demonstrate how they can be used.
+The files in `automation-files` are content types and content type schemas that allow you to create Bynder content items.
 
 Firstly install the project dependencies ensuring that you are node version `18.x` first and then running `npm i`.
 
