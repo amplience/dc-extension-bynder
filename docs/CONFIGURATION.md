@@ -193,7 +193,107 @@ This will be an Array of objects. Each object can hold information for a single 
 }
 ```
 
-> Note: These are the most basic forms of schema configuration. You can strongly type these if you prefer and enforce values. Strongly typing can be useful if consuming via our GQL API as you can then return only the fields that you require.
+> Note: These are the most basic forms of schema configuration. You can strongly type these if you prefer and enforce values. Strongly typing can be useful if consuming via our GQL API as you can then return only the fields that you require. For an example of this see [Strongly Typed Schema Example](#stongly-typed-schema-example) below.
+
+### Stongly Typed Schema Example
+
+Without enforcement on values, this extension will map the entire response from Bynder into your content form.
+
+The example below uses a complex schema in Multi select mode to ensure that we can show:
+
+* Enforcement of maximum items (5)
+* Each known value is typed
+* All **root** level properties 
+
+```json
+"bynder": {
+  "title": "Bynder Array",
+  "description": "A list of references to items in Bynder",
+  "type": "array",
+  "maxItems": 5,
+  "items": {
+    "type": "object",
+    "properties": {
+      "__typename": {
+        "title": "TypeName",
+        "description": "Type name of the asset from Bynder",
+        "type": "string"
+      },
+      "id": {
+        "title": "ID",
+        "description": "ID of the asset from Bynder",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "description": "name of the asset from Bynder",
+        "type": "string"
+      },
+      "databaseId": {
+        "title": "DatabaseId",
+        "description": "Database ID of the asset from Bynder",
+        "type": "string"
+      },
+      "createdAt": {
+        "title": "createdAt",
+        "description": "createdAt of the asset from Bynder",
+        "type": "string"
+      },
+      "originalUrl": {
+        "title": "originalUrl",
+        "description": "originalUrl of the asset from Bynder",
+        "type": "string"
+      },
+      "publishedAt": {
+        "title": "publishedAt",
+        "description": "publishedAt of the asset from Bynder",
+        "type": "string"
+      },
+      "type": {
+        "title": "type",
+        "description": "type of the asset from Bynder",
+        "type": "string"
+      },
+      "updatedAt": {
+        "title": "updatedAt",
+        "description": "type of the asset from Bynder",
+        "type": "string"
+      },
+      "url": {
+        "title": "url",
+        "description": "url of the asset from Bynder",
+        "type": "string"
+      },
+      "extensions": {
+        "title": "extensions",
+        "description": "Extensions of the asset from Bynder",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "metaproperties": {
+        "title": "metaproperties",
+        "type": "object",
+        "properties": {}
+      },
+      "derivatives": {
+        "title": "derivatives",
+        "type": "object",
+        "properties": {}
+      },
+      "files": {
+        "title": "files",
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}
+```
+
+> Note: You can go further than the root level, the above is just an example.
+
 
 ## Supported capabilities
 
