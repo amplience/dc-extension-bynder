@@ -29,20 +29,21 @@ As this is an open source project you're welcome to host your own "fork" of this
 - Self hosted: This will be your main brand deployment URL
 - Development: This will either be `http://localhost:3000` of your dev branch deployement url
 
-TODO: Screenshot
+![Bynder Extension Setup](./media/bynder-extension-setup.png)
+
 
 ### Extension Permissions Settings
 Under the Permissions tab, select the following:
 
-TODO: Screenshot
+![Bynder Extension Permissions](./media/bynder-extension-permissions.png)
 
 API Permissions:
 - ✅ Read Access
 - ✅ Modify Access
 Sandbox Permissions:
 - ✅ Allow Same Origin
-- ✅ Allow Popups
-- TBC
+- ✅ Allow Pop-ups
+- ✅ Allow Pop-ups to escape sandbox
 
 ### Installation Parameters
 
