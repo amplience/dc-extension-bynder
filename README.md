@@ -10,8 +10,6 @@ This extension allows customers to browse and select files from Bynder / WebDAM 
 
 This extension needs to be [registered](https://amplience.com/docs/development/registeringextensions.html) against a Hub with in the Dynamic Content application (Developer -> Extensions), for it to load within that Hub.
 
-![Register Bynder extension](./media/register-extension.png)
-
 - Category: Content Field
 - Label: Bynder
 - Name: bynder (needs to be unique with the Hub)
@@ -31,11 +29,13 @@ As this is an open source project you're welcome to host your own "fork" of this
 - Self hosted: This will be your main brand deployment URL
 - Development: This will either be `http://localhost:3000` of your dev branch deployement url
 
+![Register Bynder extension](./media/bynder-extension-setup.png)
+
 ### Extension Permissions Settings
 
 Under the Permissions tab, select the following:
 
-![Extension permissions](./media/extension-permissions.png)
+![Bynder Extension Permissions](./media/bynder-extension-permissions.png)
 
 API Permissions:
 
@@ -45,8 +45,8 @@ API Permissions:
 Sandbox Permissions:
 
 - ✅ Allow Same Origin
-- ✅ Allow Popups
-- ✅ Allow Popups to escape sandbox
+- ✅ Allow Pop-ups
+- ✅ Allow Pop-ups to escape sandbox
 
 ### Installation Parameters
 
