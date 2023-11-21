@@ -2,7 +2,7 @@
 
 Included in the automation folder are examples of extensions, content schemas and content types tha you can install in your Amplience Dynamic Content instances to get started with this integration.
 
-Functionality of the automation includes for each of the common modes which are
+Functionality of the automation includes for each of the common modes which are:
 
 1) Single Select
 2) Multi Select
@@ -17,7 +17,8 @@ Automation:
  - Default Cards
  - Default Visualisation (JSON Preview)
 
- > Note: The automation does has minimal configuration, only settings for each mode as these configurations are optional and specific to an implementation and your Bynder account. Feel free to add specifics like your portal url manually or via the Amplience Dynamic Content Extension Settings UI. 
+ > Note: The automation does has minimal configuration, only settings for each mode and a default `assetType` filter for `image` only as these configurations are optional and specific to an implementation and your Bynder account.
+ Feel free to add specifics like your portal url manually or via the Amplience Dynamic Content Extension Settings UI. 
 
 ## Prerequisites for automation
 
@@ -80,7 +81,7 @@ These additional options are not mandatory but may be useful:
 |`--schemaBaseUri`| |determines what base URI is used for the schema IDs being imported. If not provided, this will default to `https://demostore.amplience.com`|
 
 ## Automation result
-Once you've run the automation, your account will be populated with content schemas, content types, dependant extensions, cards, icons and visualisations all pointing to default Stylitics accounts.
+Once you've run the automation, your account will be populated with content schemas, content types, dependant extensions, cards, icons and JSON visualisation.
 
 ## Customisations & Implementation
 
@@ -105,6 +106,13 @@ More information here: [Icons documentation](https://amplience.com/developers/do
 These are iframed HTML pages which provide a preview of the content when selecting from the library view.
 
 More information here: [Cards documentation](https://amplience.com/developers/docs/dev-tools/guides-tutorials/content-types/#configuring-a-card).
+
+By default, the cards used map to known attributes stored by Bynder regardless of the mode used which are:
+
+* Name: `name`
+* Image(s): `originalUrl`
+
+You can find more information about cards and customisations [here](../docs/CARDS.md)
 
 
 #### Customising Visualisations

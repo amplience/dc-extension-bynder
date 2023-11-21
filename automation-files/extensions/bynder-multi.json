@@ -6,7 +6,7 @@
   "height": 200,
   "enabledForAllContentTypes": false,
   "category": "CONTENT_FIELD",
-  "parameters": "{\n  \"bynderConfig\": {\n    \"mode\": \"MultiSelect\"\n  }\n}",
+  "parameters": "{\n  \"bynderConfig\": {\n    \"mode\": \"MultiSelect\",\n        \"assetTypes\": [\"image\"]\n    }\n}",
   "snippets": [
     {
       "label" : "Bynder - Multi Select",
