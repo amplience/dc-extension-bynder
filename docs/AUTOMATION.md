@@ -33,7 +33,7 @@ In order for this automation to work, you must have the following:
 
 ## Other assumptions
 
-These are other assumptions for the automation, but can be changes to match your Amplience Dynamic Content account setup.
+These are other assumptions for the automation, but can be changed to match your Amplience Dynamic Content account setup.
 
 ### Default Repository
 The automation assumes that you have a repository in your Dynamic Content hub with a 'name' of `content`. This is default in most account setups.
