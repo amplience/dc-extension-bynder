@@ -96,6 +96,7 @@ You will find exmples in the following page: [Example Schemas](./docs/EXAMPLES.m
 - [Hosting](./docs/HOSTING.md)
 - [Usage](./docs/USAGE.md)
 - [FAQ](./docs/FAQ.md)
+- [Automation](./docs/AUTOMATION.md)
 - [Contributing](./CONTRIBUTING.md)
 - [Support](./support.md)
 - [Licensing](./LICENSE)
