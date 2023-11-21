@@ -89,6 +89,7 @@ It's also possible to use content mapping to get and rename the properties you n
 You will find exmples in the following page: [Example Schemas](./docs/EXAMPLES.md)
 
 ## 🌍 Useful Links
+-   [Automation](./docs/AUTOMATION.md)
 -   [Contributing](./CONTRIBUTING.md)
 -   [Support](./support.md)
 -   [Licensing](./LICENSE)

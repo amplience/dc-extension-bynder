@@ -1,8 +1,8 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://amplience.com/content/bynder/multi-select",
-	"title": "Title",
-	"description": "Description",
+	"$id": "{{schemaBaseUri}}/content/bynder/multi-select",
+	"title": "Bynder Multi Select",
+	"description": "Example Schema for multi select items from Bynder",
 	"allOf": [
 		{
 			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
@@ -14,7 +14,6 @@
 			"title": "Bynder Array",
 			"description": "A list of references to items in Bynder",
 			"type": "array",
-			"maxItems": 5,
 			"items": {
 			},
 			"ui:extension": {
