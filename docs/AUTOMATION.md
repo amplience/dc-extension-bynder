@@ -1,6 +1,6 @@
 # Automation
 
-Included in the automation folder are examples of extensions, content schemas and content types tha you can install in your Amplience Dynamic Content instances to get started with this integration.
+Included in the automation folder are examples of extensions, content schemas and content types that you can install in your Amplience Dynamic Content instances to get started with this integration.
 
 Functionality of the automation includes for each of the common modes which are
 
@@ -17,7 +17,7 @@ Automation:
  - Default Cards
  - Default Visualisation (JSON Preview)
 
- > Note: The automation does has minimal configuration, only settings for each mode as these configurations are optional and specific to an implementation and your Bynder account. Feel free to add specifics like your portal url manually or via the Amplience Dynamic Content Extension Settings UI. 
+ > Note: The automation has minimal configuration, only settings for each mode as these configurations are optional and specific to an implementation and your Bynder account. Feel free to add specifics like your portal url manually or via the Amplience Dynamic Content Extension Settings UI. 
 
 ## Prerequisites for automation
 
@@ -113,7 +113,7 @@ These are iframed HTML pages displayed alongside the Amplience content editor to
 
 More information here: [Visualisations documentation](https://amplience.com/developers/docs/dev-tools/guides-tutorials/content-types/#setting-up-visualizations).
 
-We would recommend that these visulisations point to render your actual application to give users a clear representation of their content.
+We would recommend that these visualisations point to render your actual application to give users a clear representation of their content.
 
 ### Configuration
 
