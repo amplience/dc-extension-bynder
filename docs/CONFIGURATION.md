@@ -79,7 +79,7 @@ The format will be:
 
 ## Schema Configuration
 
-Schemas in Amplience will need to be updated to use the extension. This will be no different than any other content field extensions:
+Schemas in Amplience will need to be updated to use the extension (you will find exmples in the following page: [Example Schemas](./EXAMPLES.md)). This will be no different than any other content field extensions:
 
 Documentation: https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type
 
