@@ -21,7 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"{src,test}/**/*.{ts[x],js}\""
+    "format": "prettier --write \"{src,test}/**/*.{ts[x],js}\"",
+    "import": "ts-node --project tsconfig.scripts.json scripts/amplience/index.ts import"
   },
   "eslintConfig": {
     "extends": [
@@ -34,7 +35,12 @@
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "prettier": "3.0.3"
+    "prettier": "3.0.3",
+    "@amplience/dc-cli": "^0.19.1",
+    "dc-management-sdk-js": "^1.20.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "handlebars": "^4.7.8"
   },
   "browserslist": {
     "production": [
