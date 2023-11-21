@@ -4,8 +4,8 @@ These are iframed HTML pages which provide a preview of the content when selecti
 
 More information here: [Cards documentation](https://amplience.com/developers/docs/dev-tools/guides-tutorials/content-types/#configuring-a-card)
 
-## General Reccomendation
-We would recommend that cards are implemented as part of your application to give the most realisting preview possible. You are also welcome to use and customise the cards with details below mapping to your content.
+## General Recommendation
+We would recommend that cards are implemented as part of your application to give the most realistic preview possible. You are also welcome to use and customise the cards with details below mapping to your content.
 
 ## Sample Cards for Bynder Integration
 
@@ -113,7 +113,7 @@ Whilst functional, they have the following issues which you may wish to optimise
 
 1) **File Size:** the `originalUrl` attribute is the full size of the asset. This means cards can be very large to load. If you have derivitates and other files in Bynder more suitable for this view (like a thumbnail) we would recommend mapping to these as per the examples.
 
-2) **File Format:** the `originalUrl` attribute is the source file. Bynder can store other file formats which are not images (like documents, videos, audio etc.). In Bynder you may have derivates and files which are more suitable to use as an image.
+2) **File Format:** the `originalUrl` attribute is the source file. Bynder can store other file formats which are not images (like documents, videos, audio etc). In Bynder you may have derivates and files which are more suitable to use as an image.
 
 #### What happens with a 'non-image' file format?
 
