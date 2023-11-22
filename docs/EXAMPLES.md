@@ -1,8 +1,11 @@
-# dc-extension-bynder
+# Examples
 
-This section presents example schemas for the various select possibilities.
+This section presents examples which may be valuable in testing / implementation.
 
 ## Example schemas 
+Below you will find a list of example content schemas aligning to the different modes.
+
+> Note: The extension name is different in each one for illustration purposes. Your extension name may just be `bynder` or any unique name you choose.
 
 ### Single Select schema
 
