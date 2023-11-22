@@ -266,9 +266,9 @@ Without enforcement on values, this extension will map the entire response from 
 
 The example below uses a complex schema in Multi select mode to ensure that we can show:
 
-* Enforcement of maximum items (5)
-* Each known value is typed
-* All **root** level properties 
+- Enforcement of maximum items (5)
+- Each known value is typed
+- All **root** level properties
 
 ```json
 "bynder": {
@@ -358,7 +358,6 @@ The example below uses a complex schema in Multi select mode to ensure that we c
 ```
 
 > Note: You can go further than the root level, the above is just an example.
-
 
 ## Supported capabilities
 
