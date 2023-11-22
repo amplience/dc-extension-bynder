@@ -74,6 +74,20 @@ Resulting content item:
 
 ![Bynder Single Select File](./../media/bynder-single-select-file-content.png)
 
+When a specific file is selected the saved JSON response will have an additional attribute `additionalInfo`. This can be used for the specific file that the user selected in your application.
+
+Example:
+```json
+"additionalInfo": {
+  "selectedFile": {
+    "url": "https://wave-trial.getbynder.com/m/c123456789b83af/original/pencils.JPG",
+    "width": 3024,
+    "height": 4032,
+    "fileSize": 1755462
+  }
+}
+```
+
 ### Multi Select
 
 ```json
