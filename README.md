@@ -66,28 +66,16 @@ Here is a sample installation parameters payload:
 }
 ```
 
-Elements in the `bynderConfig` object are passed to configure Bynder. The following asset types can be used:
-
-- image
-- document
-- audio
-- video
-
-The mode can either be `SingleSelect`, `SingleSelectFile` or `MultiSelect` if you want to choose more than one media.
-
-It's also possible to use content mapping to get and rename the properties you need for the extension, using JSON Path.
-
-### Schemas examples
-
-You will find exmples in the following page: [Example Schemas](./docs/EXAMPLES.md)
+For more detailed information, please refer to the links below.
 
 ## 🌍 Useful Links
 
 - [Configuration](./docs/CONFIGURATION.md)
-- [Hosting](./docs/HOSTING.md)
+- [Example Schemas](./docs/EXAMPLES.md)
 - [Usage](./docs/USAGE.md)
-- [FAQ](./docs/FAQ.md)
 - [Automation](./docs/AUTOMATION.md)
+- [FAQ](./docs/FAQ.md)
 - [Contributing](./CONTRIBUTING.md)
+- [Hosting](./docs/HOSTING.md)
 - [Support](./support.md)
 - [Licensing](./LICENSE)
