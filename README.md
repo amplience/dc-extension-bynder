@@ -56,22 +56,30 @@ Here is a sample installation parameters payload:
 {
   "bynderConfig": {
     "portal": {
-      "url": "https://wave-trial.getbynder.com/"
+      "url": "{{YOUR_BYNDER_PORTAL_URL}}"
     },
     "assetTypes": ["image"],
-    "mode": "MultiSelect"
+    "mode": "SingleSelect"
   },
-  "contentMapping": {
-    "title": {
-      "jsonPath": "$.name"
+  "amplienceConfig": {
+    "contentMapping": {
+      "title": {
+        "jsonPath": "$.name"
+      },
+      "mediaId": {
+        "jsonPath": "$.databaseId"
+      },
+      "url": {
+        "jsonPath": "$.url"
+      }
     },
-    "mediaId": {
-      "jsonPath": "$.databaseId"
-    },
-    "url": {
-      "jsonPath": "$.url"
-    }
+    "cardImages" : [
+      "small",
+      "medium",
+      "mini"
+    ]
   }
+  
 }
 ```
 

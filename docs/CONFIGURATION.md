@@ -151,6 +151,36 @@ The example below has just these settings with `{{PLACEHOLDER}}`` content for yo
 
 ### Amplience Configuration (amplienceConfig)
 
+#### Card Images
+
+Within the extension selected assets are dispayed in a card. In Bynder you have the option to setup your own files so there is an option to specify the options to use in order of fallback. This can be useful for performance and also if you have custom files setup in Bynder with additional transformations.
+
+This uses the `files` attribute from Bynder.
+
+> Note: This is optional, if you do not wish to specify a card mapping you do not need to.
+
+By default the card will look for files in the following order:
+
+1) `webImage`
+2) `thumbnail`
+3) `mini`
+
+Example extension configuration for card images:
+
+```json
+"amplienceConfig": {
+  "cardImages": [
+    "small",
+    "medium",
+    "large"
+  ]
+}
+```
+This will look for the card image in the order specified in the array.
+
+In all cases, if none are found then the root level `originalUrl` property will be used.
+
+
 #### Content Mapping
 
 By default, all Bynder asset data is stored in the same data structure provided by Bynder. If you require more control over how asset data from Bynder is stored in your Dynamic Content content item, you can configure the extension with content mapping. This allows you to define a new data structure using json path.
@@ -180,7 +210,7 @@ When using `contentMapping` to define a new data structure we also include a num
 
 With `contentMapping` defined like the example above you will get the following output (including required fields):
 
-```
+``` json
 {
   "content": {
     "bynder": {
@@ -215,6 +245,8 @@ With `contentMapping` defined like the example above you will get the following 
   }
 }
 ```
+
+> Note: Content Mapping only applies to **root** level nodes from the Bynder data per item
 
 ## Schema Configuration
 
