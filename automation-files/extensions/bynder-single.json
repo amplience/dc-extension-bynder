@@ -1,16 +1,16 @@
 {
   "name": "bynder-single",
   "label": "Bynder Single",
-  "description": "An example Bynder extension configured for single-select",
+  "description": "Sample extension configuration for single select",
   "url": "https://bynder.extensions.content.amplience-qa.net",
   "height": 200,
   "enabledForAllContentTypes": false,
   "category": "CONTENT_FIELD",
   "parameters": "{\n    \"bynderConfig\":{\n        \"mode\": \"SingleSelect\",\n        \"assetTypes\": [\"image\"]\n    }\n}",
-  "snippets" : [ 
+  "snippets": [
     {
-      "label" : "Bynder - Single Select",
-      "body" : "{\n    \"title\": \"Bynder Object\",\n    \"description\": \"A single reference to an item in Bynder\",\n    \"type\": \"object\",\n    \"properties\": {},\n    \"ui:extension\": {\n        \"name\": \"bynder-single\"\n    }\n}"
+      "label": "Bynder - Single Select",
+      "body": "{\n    \"title\": \"Bynder Object\",\n    \"description\": \"A single reference to an item in Bynder\",\n    \"type\": \"object\",\n    \"properties\": {},\n    \"ui:extension\": {\n        \"name\": \"bynder-single\"\n    }\n}"
     }
   ],
   "settings": "{\"API\":{\"READ\":true,\"EDIT\":true},\"SANDBOX\":{\"SAME_ORIGIN\":true,\"MODALS\":false,\"NAVIGATION\":false,\"POPUPS\":true,\"POPUP_ESCAPE_SANDBOX\":true,\"DOWNLOADS\":false,\"FORMS\":false}}",

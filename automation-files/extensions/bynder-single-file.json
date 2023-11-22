@@ -1,7 +1,7 @@
 {
   "name": "bynder-single-file",
   "label": "Bynder Single File",
-  "description": "An example Bynder extension configured for single-select file",
+  "description": "Sample extension configuration for single select file",
   "url": "https://bynder.extensions.content.amplience-qa.net",
   "height": 200,
   "enabledForAllContentTypes": false,
@@ -9,8 +9,8 @@
   "parameters": "{\n    \"bynderConfig\":{\n        \"mode\": \"SingleSelectFile\",\n        \"assetTypes\": [\"image\"]\n    }\n}",
   "snippets": [
     {
-      "label" : "Bynder - Single Select File",
-      "body" : "{\n    \"title\": \"Bynder Object File Selection\",\n    \"description\": \"A single reference to an item in Bynder with file selection\",\n    \"type\": \"object\",\n    \"properties\": {},\n    \"ui:extension\": {\n        \"name\": \"bynder-single-file\"\n    }\n}"
+      "label": "Bynder - Single Select File",
+      "body": "{\n    \"title\": \"Bynder Object File Selection\",\n    \"description\": \"A single reference to an item in Bynder with file selection\",\n    \"type\": \"object\",\n    \"properties\": {},\n    \"ui:extension\": {\n        \"name\": \"bynder-single-file\"\n    }\n}"
     }
   ],
   "settings": "{\"API\":{\"READ\":true,\"EDIT\":true},\"SANDBOX\":{\"SAME_ORIGIN\":true,\"MODALS\":false,\"NAVIGATION\":false,\"POPUPS\":true,\"POPUP_ESCAPE_SANDBOX\":true,\"DOWNLOADS\":false,\"FORMS\":false}}",

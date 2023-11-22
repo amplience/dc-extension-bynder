@@ -2,6 +2,7 @@
 
 The extension can easily be built and run locally with the following commands:
 
+- `nvm use`
 - `npm i`
 - `npm run build` / `npm start` (for live reload)
 
@@ -10,12 +11,14 @@ An active extension sdk connection to DC is required for most functionality to w
 Make sure that the extension is properly configured using the [installation parameters.](../docs/extension.md)
 
 ## Dependency versions
+
 This extension was developed and tested with:
 
 - Node version `18.x`
 - NPM version `9.x`
 
 ## Hosting
+
 You are free to host this extension yourself on any service. This can include any customisations you make but please see the [support](./../support.md) documentation if you do this.
 
 If you host this extension yourself any uptime is now your responsibility

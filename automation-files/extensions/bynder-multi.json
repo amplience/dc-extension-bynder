@@ -1,7 +1,7 @@
 {
   "name": "bynder-multi",
   "label": "Bynder Multi",
-  "description": "An example Bynder extension configured for multi-select",
+  "description": "Sample extension configuration for multi select",
   "url": "https://bynder.extensions.content.amplience-qa.net",
   "height": 200,
   "enabledForAllContentTypes": false,
@@ -9,8 +9,8 @@
   "parameters": "{\n  \"bynderConfig\": {\n    \"mode\": \"MultiSelect\",\n        \"assetTypes\": [\"image\"]\n    }\n}",
   "snippets": [
     {
-      "label" : "Bynder - Multi Select",
-      "body" : "{\n    \"title\": \"Bynder Array\",\n    \"description\": \"A list of references to items in Bynder\",\n    \"type\": \"array\",\n    \"items\": {},\n    \"ui:extension\": {\n        \"name\": \"bynder-multi\",\n        \"params\": {}\n    }\n}"
+      "label": "Bynder - Multi Select",
+      "body": "{\n    \"title\": \"Bynder Array\",\n    \"description\": \"A list of references to items in Bynder\",\n    \"type\": \"array\",\n    \"items\": {},\n    \"ui:extension\": {\n        \"name\": \"bynder-multi\",\n        \"params\": {}\n    }\n}"
     }
   ],
   "settings": "{\"API\":{\"READ\":true,\"EDIT\":true},\"SANDBOX\":{\"SAME_ORIGIN\":true,\"MODALS\":false,\"NAVIGATION\":false,\"POPUPS\":true,\"POPUP_ESCAPE_SANDBOX\":true,\"DOWNLOADS\":false,\"FORMS\":false}}",

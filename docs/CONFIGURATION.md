@@ -3,6 +3,8 @@
 ## Table of Contents
 
 - [Extension Configuration](#extension-configuration)
+  - [Bynder Configuration (bynderConfig)](#bynder-configuration-bynderconfig)
+  - [Amplience Configuration (amplienceConfig)](#amplience-configuration-amplienceconfig)
 - [Schema Configuration](#schema-configuration)
   - [Single select Schema configuration](#single-select-schema-configuration)
   - [Multi select Schema Configuration](#multi-select-schema-configuration)
@@ -14,7 +16,7 @@
 - [Documentation](#documentation)
 - [Out of scope](#out-of-scope)
 - [Feature requests](#feature-requests)
-- [Public listings  ](#public-listings)
+- [Public listings](#public-listings)
 
 ## Extension configuration
 
@@ -47,7 +49,7 @@ Options documented by Bynder at time of build of the extension are listed below 
 | defaultSearchTerm             | Set the initial value for search term                                                                                                                                          | "Keyword"                                                              | None                                    |
 | language                      | Set language for the Compact View                                                                                                                                              | "en_US", "nl_NL", "de_DE", "fr_FR", "es_ES"                            | "en_US"                                 |
 | mode                          | Set the Compact View to allow multiple or single asset selection                                                                                                               | "MultiSelect", "SingleSelect", "SingleSelectFile"                      | "SingleSelect"                          |
-| theme                         | A theme object for customizing Compact View look and feel                                                                                                                      |     Theme                                                              | None                                    |
+| theme                         | A theme object for customizing Compact View look and feel                                                                                                                      | Theme                                                                  | None                                    |
 | assetTypes                    | An array of strings for limiting allowed asset types                                                                                                                           | AssetType[]                                                            | ["image", "audio", "video", "document"] |
 | assetFieldSelection           | A multiline string containing desired asset fields (see below)                                                                                                                 | String                                                                 | All fields                              |
 | hideExternalAccess            | If true, removes access to external DAM from assets and collections                                                                                                            | true, false                                                            | false                                   |
@@ -64,24 +66,191 @@ These properties for the configuration can be set in the installation parameters
 
 Documentation: https://amplience.com/developers/docs/integrations/extensions/register-use/#installation-parameters
 
-The format will be:
+This should be supplied in the following format:
 
 ```json
 {
-  "bynderConfig":{
+  "bynderConfig": {
     // Bynder configuration properties
   },
-  "amplienceConfig":{
+  "amplienceConfig": {
     // Amplience configuration properties
   }
 }
 ```
 
+Further information about settings for these properties is listed below.
+
+### Bynder Configuration (bynderConfig)
+
+#### General
+
+You can use any of the attributes from Bynder to customise your extension to your account. Below is an example of these settings:
+
+```json
+{
+  "bynderConfig": {
+    "portal": {
+      "url": "{{YOUR_BYNDER_PORTAL_URL}}",
+      "readOnly": true,
+      "editable": false
+    },
+    "mode": "SingleSelect",
+    "language": "fr_FR",
+    "defaultSearchTerm": "Logo",
+    "assetTypes": ["image"],
+    "modalStyles": {
+      "width": "100%"
+    },
+    "assetFilter": {
+      "showToolbar": true,
+      "isLimitedUse": true
+    },
+    "theme": {
+      "colorPrimary": "{{YOUR_HEX_COL_#123456}}",
+      "colorButtonPrimary": "{{YOUR_HEX_COL_#123456}}",
+      "colorButtonPrimaryLabel": "{{YOUR_HEX_COL_#123456}}",
+      "colorButtonPrimaryActive": "{{YOUR_HEX_COL_#123456}}",
+      "colorButtonPrimaryHover": "{{YOUR_HEX_COL_#123456}}",
+      "colorButtonPrimaryHoverLabel": "{{YOUR_HEX_COL_#123456}}"
+    },
+    "authentication": {
+      "token": "{{YOUR_BYNDER_ACCESS TOKEN}}"
+    }
+  },
+  "amplienceConfig": {
+    // Amplience configuration properties
+  }
+}
+```
+
+#### Using a Bynder Access token
+
+If you wish for all users in the Amplience Dynamic Content CMS to be able to browse and select assets **without** having to login, you can provide a Bynder Access token in your extension settings.
+
+> Note: It is also recommended that you provide your portal URL.
+
+The example below has just these settings with `{{PLACEHOLDER}}`` content for your specific details
+
+```json
+{
+  "bynderConfig": {
+    "portal": {
+      "url": "{{YOUR_BYNDER_PORTAL_URL}}"
+    },
+    "mode": "SingleSelect", // Can be any mode
+    "authentication": {
+      "token": "{{YOUR_BYNDER_ACCESS TOKEN}}"
+    }
+  },
+  "amplienceConfig": {
+    // Amplience configuration properties
+  }
+}
+```
+
+### Amplience Configuration (amplienceConfig)
+
+#### Card Images
+
+Within the extension selected assets are dispayed in a card. In Bynder you have the option to set up your own files so there is an option to specify the options to use in order of fallback. This can be useful for performance and also if you have custom files set up in Bynder with additional transformations.
+
+This uses the `files` attribute from Bynder.
+
+> Note: This is optional, if you do not wish to specify a card mapping you do not need to.
+
+By default the card will look for files in the following order:
+
+1) `webImage`
+2) `thumbnail`
+3) `mini`
+
+Example extension configuration for card images:
+
+```json
+"amplienceConfig": {
+  "cardImages": [
+    "small",
+    "medium",
+    "large"
+  ]
+}
+```
+This will look for the card image in the order specified in the array.
+
+In all cases, if none are found then the root level `originalUrl` property will be used.
+
+
+#### Content Mapping
+
+By default, all Bynder asset data is stored in the same data structure provided by Bynder. If you require more control over how asset data from Bynder is stored in your Dynamic Content content item, you can configure the extension with content mapping. This allows you to define a new data structure using json path.
+
+Content mapping can be setup using the `contentMapping` configuration option e.g.
+
+```
+"amplienceConfig": {
+    "contentMapping": {
+      "title": {
+        "jsonPath": "$.name"
+      },
+      "mediaId": {
+        "jsonPath": "$.databaseId"
+      }
+    }
+  }
+```
+
+When using `contentMapping` to define a new data structure we also include a number of required properties, in addition to the defined content mappings:
+
+- `name`
+- `databaseId`
+- `files`
+- `url`
+- `additionalInfo`
+
+With `contentMapping` defined like the example above you will get the following output (including required fields):
+
+``` json
+{
+  "content": {
+    "bynder": {
+      "title": "pencils",  // <- mapped property
+      "mediaId": "819F230B-B9AF-46C6-9404D80CAC9C5E3C",  // <- mapped property
+      "url": "https://wave-trial.getbynder.com/media/?mediaId=819F230B-B9AF-46C6-9404D80CAC9C5E3C",
+      "name": "pencils",
+      "files": {
+        "original": {
+          "url": "https://wave-trial.getbynder.com/m/c123456789b83af/original/pencils.JPG",
+          "width": 3024,
+          "height": 4032,
+          "fileSize": 1755462
+        },
+        ...
+      },
+      "databaseId": "819F230B-B9AF-46C6-9404D80CAC9C5E3C",
+      "additionalInfo": {
+        "selectedFile": {
+          "url": "https://wave-trial.getbynder.com/m/c123456789b83af/original/pencils.JPG",
+          "width": 3024,
+          "height": 4032,
+          "fileSize": 1755462
+        }
+      }
+    },
+    "_meta": {
+      "name": "Bynder Asset 1",
+      "schema": "https://amplience.com/example/schema/bynder/asset.json",
+      "deliveryId": "16da7260-1dcd-4933-a6e7-6a0b1c973ff9"
+    }
+  }
+}
+```
+
+> Note: Content Mapping only applies to **root** level nodes from the Bynder data per item
+
 ## Schema Configuration
 
-Schemas in Amplience will need to be updated to use the extension (you will find exmples in the following page: [Example Schemas](./EXAMPLES.md)). This will be no different than any other content field extensions:
-
-Documentation: https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type
+Schemas in Amplience will need to be updated to use the extension (you will find examples in the following page: [Example Schemas](./EXAMPLES.md)). This will be no different to any other content field extensions:
 
 [Registering and using extensions | Amplience Developer Portal](https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type)
 
@@ -89,10 +258,10 @@ The extension will then replace the field.
 
 ### Single select Schema configuration
 
-This will be a a single object which can hold information for a single asset from Bynder:
+This will be a single object which can hold information for a single asset from Bynder:
 
 ```json
-"bynderObject": {
+"bynder": {
     "title": "Bynder Object",
     "description": "A single reference to an item in Bynder",
     "type": "object",
@@ -108,7 +277,7 @@ This will be a a single object which can hold information for a single asset fro
 This will be an Array of objects. Each object can hold information for a single asset in Bynder:
 
 ```json
-"bynderArray": {
+"bynder": {
     "title": "Bynder Array",
     "description": "A list of references to items in Bynder",
     "type": "array",
@@ -119,7 +288,106 @@ This will be an Array of objects. Each object can hold information for a single 
 }
 ```
 
-> Note: These are the most basic forms of schema configuration. You can strongly type these if you prefer and enforce values. Strongly typing can be useful if consuming via our GQL API as you can then return only the fields that you require.
+> Note: These are the most basic forms of schema configuration. You can strongly type these if you prefer and enforce values. Strongly typing can be useful if consuming via our GQL API as you can then return only the fields that you require. For an example of this see [Strongly Typed Schema Example](#stongly-typed-schema-example) below.
+
+### Stongly Typed Schema Example
+
+Without enforcement on values, this extension will map the entire response from Bynder into your content form.
+
+The example below uses a complex schema in Multi select mode to ensure that we can show:
+
+- Enforcement of maximum items (5)
+- Each known value is typed
+- All **root** level properties
+
+```json
+"bynder": {
+  "title": "Bynder Array",
+  "description": "A list of references to items in Bynder",
+  "type": "array",
+  "maxItems": 5,
+  "items": {
+    "type": "object",
+    "properties": {
+      "__typename": {
+        "title": "TypeName",
+        "description": "Type name of the asset from Bynder",
+        "type": "string"
+      },
+      "id": {
+        "title": "ID",
+        "description": "ID of the asset from Bynder",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "description": "name of the asset from Bynder",
+        "type": "string"
+      },
+      "databaseId": {
+        "title": "DatabaseId",
+        "description": "Database ID of the asset from Bynder",
+        "type": "string"
+      },
+      "createdAt": {
+        "title": "createdAt",
+        "description": "createdAt of the asset from Bynder",
+        "type": "string"
+      },
+      "originalUrl": {
+        "title": "originalUrl",
+        "description": "originalUrl of the asset from Bynder",
+        "type": "string"
+      },
+      "publishedAt": {
+        "title": "publishedAt",
+        "description": "publishedAt of the asset from Bynder",
+        "type": "string"
+      },
+      "type": {
+        "title": "type",
+        "description": "type of the asset from Bynder",
+        "type": "string"
+      },
+      "updatedAt": {
+        "title": "updatedAt",
+        "description": "type of the asset from Bynder",
+        "type": "string"
+      },
+      "url": {
+        "title": "url",
+        "description": "url of the asset from Bynder",
+        "type": "string"
+      },
+      "extensions": {
+        "title": "extensions",
+        "description": "Extensions of the asset from Bynder",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "metaproperties": {
+        "title": "metaproperties",
+        "type": "object",
+        "properties": {}
+      },
+      "derivatives": {
+        "title": "derivatives",
+        "type": "object",
+        "properties": {}
+      },
+      "files": {
+        "title": "files",
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}
+```
+
+> Note: You can go further than the root level, the above is just an example.
 
 ## Supported capabilities
 
@@ -160,7 +428,7 @@ In addition to the functionality mentioned in General, Multi Select views will a
 ## Access
 
 This extension will be hosted on a production URL by Amplience so customers looking to use this integration will not have to set up infrastructure to use it. This URL will be:
-https://bynder.extensions.content.amplience.net
+`https://bynder.extensions.content.amplience.net`
 
 This hosted URL will have the same SLA as the Amplience Back Office for uptime.
 
@@ -171,7 +439,7 @@ Amplience will also make this extension publicly available in an Amplience Githu
 - Additional developer documentation
 - Ability to fork, build and host themselves if they choose to
 
-Github URL: https://github.com/amplience/dc-extension-bynder
+Github URL: `https://github.com/amplience/dc-extension-bynder`
 
 > Note: any customisations made will be unsupported.
 
@@ -205,7 +473,7 @@ We welcome feature requests at Amplience as they enhance the product for all cus
 
 All requests are triaged and evaluated by the Amplience product team who may ask the requester for more information.
 
-The Amplience product team has discretion on whether features will be put onto the roadmap or not. And control over priorities and timing based on other priorities.
+The Amplience product team has discretion on whether features will be put onto the roadmap or not, and control over priorities and timing based on other priorities.
 
 ## Public listings
 
@@ -213,4 +481,4 @@ This extension will be available on the Amplience Github on release.
 
 Amplience will also list this in the Amplience Marketplace found here: [Marketplace | Amplience](https://amplience.com/marketplace/)
 
-Amplience will also contact Bynder to list on their integrations page found here: [Bynder Integration Marketplace | Bynder](https://marketplace.bynder.com/)
+Amplience may also contact Bynder to list on their integrations page found here: [Bynder Integration Marketplace | Bynder](https://marketplace.bynder.com/)
