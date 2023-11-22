@@ -153,7 +153,7 @@ The example below has just these settings with `{{PLACEHOLDER}}`` content for yo
 
 #### Card Images
 
-Within the extension selected assets are dispayed in a card. In Bynder you have the option to set up your own files so there is an option to specify the options to use in order of fallback. This can be useful for performance and also if you have custom files set up in Bynder with additional transformations.
+Within the extension selected assets are displayed in a card. In Bynder you have the option to set up your own files so there is an option to specify the options to use in order of fallback. This can be useful for performance and also if you have custom files set up in Bynder with additional transformations.
 
 This uses the `files` attribute from Bynder.
 
@@ -246,7 +246,7 @@ With `contentMapping` defined like the example above you will get the following 
 }
 ```
 
-> Note: Content Mapping only applies to **root** level nodes from the Bynder data per item
+> Note: Content Mapping only applies to **root** level nodes
 
 ## Schema Configuration
 
