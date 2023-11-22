@@ -252,8 +252,6 @@ With `contentMapping` defined like the example above you will get the following 
 
 Schemas in Amplience will need to be updated to use the extension (you will find exmples in the following page: [Example Schemas](./EXAMPLES.md)). This will be no different than any other content field extensions:
 
-Documentation: https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type
-
 [Registering and using extensions | Amplience Developer Portal](https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type)
 
 The extension will then replace the field.
@@ -431,7 +429,7 @@ In addition to the functionality mentioned in General, Multi Select views will a
 ## Access
 
 This extension will be hosted on a production URL by Amplience so customers looking to use this integration will not have to set up infrastructure to use it. This URL will be:
-https://bynder.extensions.content.amplience.net
+`https://bynder.extensions.content.amplience.net`
 
 This hosted URL will have the same SLA as the Amplience Back Office for uptime.
 
@@ -442,7 +440,7 @@ Amplience will also make this extension publicly available in an Amplience Githu
 - Additional developer documentation
 - Ability to fork, build and host themselves if they choose to
 
-Github URL: https://github.com/amplience/dc-extension-bynder
+Github URL: `https://github.com/amplience/dc-extension-bynder`
 
 > Note: any customisations made will be unsupported.
 
@@ -484,4 +482,4 @@ This extension will be available on the Amplience Github on release.
 
 Amplience will also list this in the Amplience Marketplace found here: [Marketplace | Amplience](https://amplience.com/marketplace/)
 
-Amplience will also contact Bynder to list on their integrations page found here: [Bynder Integration Marketplace | Bynder](https://marketplace.bynder.com/)
+Amplience may also contact Bynder to list on their integrations page found here: [Bynder Integration Marketplace | Bynder](https://marketplace.bynder.com/)
