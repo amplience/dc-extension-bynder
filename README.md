@@ -70,9 +70,10 @@ For more detailed information, please refer to the links below.
 
 ## 🌍 Useful Links
 
-- [Configuration](./docs/CONFIGURATION.md)
-- [Example Schemas](./docs/EXAMPLES.md)
 - [Usage](./docs/USAGE.md)
+- [Configuration](./docs/CONFIGURATION.md)
+- [Cards](./docs/CARDS.md)
+- [Examples](./docs/EXAMPLES.md)
 - [Automation](./docs/AUTOMATION.md)
 - [FAQ](./docs/FAQ.md)
 - [Contributing](./CONTRIBUTING.md)

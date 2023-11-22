@@ -126,7 +126,7 @@ Resulting content item:
 
 Examples of fetching stored Bynder data and rendering in an app.
 
-Install and configure [https://github.com/amplience/dc-delivery-sdk-js](dc-delivery-sdk-js) as defined by the SDK's documentation.
+Install and configure [dc-delivery-sdk-js](https://github.com/amplience/dc-delivery-sdk-js) as defined by the SDK's documentation.
 
 Fetch your Bynder content item:
 

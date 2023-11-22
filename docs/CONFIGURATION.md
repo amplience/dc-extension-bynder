@@ -1,4 +1,4 @@
-# dc-extension-bynder
+# Configuration
 
 ## Table of Contents
 
@@ -388,6 +388,32 @@ The example below uses a complex schema in Multi select mode to ensure that we c
 ```
 
 > Note: You can go further than the root level, the above is just an example.
+
+## Content Type Configuration
+
+Below are helpful recommendations for setting up your content types in Amplience. See the [Content Type documentation](https://amplience.com/developers/docs/dev-tools/guides-tutorials/content-types/) for more information.
+
+You are free to use the examples listed below or to create your own:
+
+### Icons
+
+- SingleSelect: `https://ampproduct.a.bigcontent.io/v1/static/icon-bynderextension-singleselect`
+- SingleSelectFile: `https://ampproduct.a.bigcontent.io/v1/static/icon-bynderextension-singleselectfile`
+- MultiSelect: `https://ampproduct.a.bigcontent.io/v1/static/icon-bynderextension-multiselect`
+
+### Cards
+
+Please refer to the [Cards documentation](./CARDS.md)
+
+### Visualisations
+
+It is useful when developing you content types to be able to see the JSON when authoring content.
+
+- Label: `JSON`
+- URL: `https://delivery-preview.visualizations.content.amplience.net?id={{content.sys.id}}&vse={{vse.domain}}&locale={{locales}}&hub={{hub.name}}&realtime=true`
+
+> Note: We would recommend that these visualisations point to render your actual application to give users a clear representation of their content.
+
 
 ## Supported capabilities
 

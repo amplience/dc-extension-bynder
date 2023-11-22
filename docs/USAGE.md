@@ -1,4 +1,4 @@
-# dc-extension-bynder
+# Usage
 
 ## Prerequisites
 
