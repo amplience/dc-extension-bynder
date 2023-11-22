@@ -112,7 +112,7 @@ Below are visual examples of this card in use:
 - The images are mapped `originalUrl` attribute in the content saved in the Amplience Content Form for the **first, second, third and forth** items. Each item is 50% width and height of the card. The view fills the maximum space at the right aspect ratio using the CSS attribute `object-fit: cover`
 - The name is mapped to the `name` attribute in the content saved in the content form for the **first** item only.
 
-## Customisation Reccomendations
+## Customisation Recommendations
 
 ### Image mappings
 

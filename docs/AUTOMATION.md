@@ -17,7 +17,7 @@ Automation:
 - Default Cards
 - Default Visualisation (JSON Preview)
 
-> Note: The automation has minimal configuration, only settings for each mode and a default `assetType` filter for `image` only as these configurations are optional and specific to an implementation and your Bynder account.
+> Note: The automation has minimal configuration, settings for each mode and a default `assetType` filter for `image` only as these configurations are optional and specific to an implementation and your Bynder account.
 > Feel free to add specifics like your portal url manually or via the Amplience Dynamic Content Extension Settings UI.
 
 ## Prerequisites for automation
@@ -86,7 +86,7 @@ These additional options are not mandatory but may be useful:
 
 ## Automation result
 
-Once you've run the automation, your account will be populated with content schemas, content types, dependant extensions, cards, icons and JSON visualisation.
+Once you've run the automation, your account will be populated with content schemas, content types, dependent extensions, cards, icons and JSON visualisation.
 
 ## Customisations & Implementation
 

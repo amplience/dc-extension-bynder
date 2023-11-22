@@ -153,7 +153,7 @@ The example below has just these settings with `{{PLACEHOLDER}}`` content for yo
 
 #### Card Images
 
-Within the extension selected assets are dispayed in a card. In Bynder you have the option to setup your own files so there is an option to specify the options to use in order of fallback. This can be useful for performance and also if you have custom files setup in Bynder with additional transformations.
+Within the extension selected assets are dispayed in a card. In Bynder you have the option to set up your own files so there is an option to specify the options to use in order of fallback. This can be useful for performance and also if you have custom files set up in Bynder with additional transformations.
 
 This uses the `files` attribute from Bynder.
 
@@ -250,7 +250,7 @@ With `contentMapping` defined like the example above you will get the following 
 
 ## Schema Configuration
 
-Schemas in Amplience will need to be updated to use the extension (you will find exmples in the following page: [Example Schemas](./EXAMPLES.md)). This will be no different than any other content field extensions:
+Schemas in Amplience will need to be updated to use the extension (you will find examples in the following page: [Example Schemas](./EXAMPLES.md)). This will be no different to any other content field extensions:
 
 [Registering and using extensions | Amplience Developer Portal](https://amplience.com/developers/docs/integrations/extensions/register-use/#enabling-a-content-editor-extension-for-a-content-type)
 
@@ -473,7 +473,7 @@ We welcome feature requests at Amplience as they enhance the product for all cus
 
 All requests are triaged and evaluated by the Amplience product team who may ask the requester for more information.
 
-The Amplience product team has discretion on whether features will be put onto the roadmap or not. And control over priorities and timing based on other priorities.
+The Amplience product team has discretion on whether features will be put onto the roadmap or not, and control over priorities and timing based on other priorities.
 
 ## Public listings
 

@@ -5,7 +5,7 @@
 In order to use this integration you must have the following:
 
 - An Amplience account with access to the Dynamic Content Platform.
-  - This requires Developer permissions role (or higher) to install and use the extension in schames/content types
+  - This requires Developer permissions role (or higher) to install and use the extension in schemas/content types
 - A Bynder (WebDAM) account setup with any Bynder pre-requisites to use Universal Compact View
 
 ## Table of Contents
@@ -41,7 +41,7 @@ Name
 
 Image from Bynder
 
-This illustration also shows that the data from Bynder is stored in the Amplience content form and available for front end renders (Including Live, Preview and visualisation)
+This illustration also shows that the data from Bynder is stored in the Amplience content form and available for front end renders (including Live, Preview and visualisation)
 
 ![Figure 4](../media/bynder-extension-field-added.png)
 
@@ -57,7 +57,7 @@ View in Bynder: Launches directly to the back office in Bynder to view / edit th
 
 Swap: Enables the user to swap this asset with another asset from Bynder. This launches the Bynder Universal Compact view with the current selected asset. When selecting a new asset the old reference will be overwritten
 
-Delete: Removes the asset from the Amplience content
+Remove asset: Deletes the asset from the Amplience content
 
 ![Figure 5](../media/bynder-extension-field-actions.png)
 

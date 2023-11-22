@@ -20,7 +20,7 @@ If you want to run the extension itself locally, this can be done with `npm run 
 
 ## Hosting the extension
 
-If you choose to host the extension yourself it must be hosted on a HTTPS location. Your extension settings and URL should be updated to reflect your hosting location.
+If you choose to host the extension yourself it must be hosted on an HTTPS location. Your extension settings and URL should be updated to reflect your hosting location.
 
 ## Keeping your fork updated with remotes
 
