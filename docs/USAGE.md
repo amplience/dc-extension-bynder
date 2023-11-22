@@ -35,11 +35,10 @@ Figure 3: Illustrates that when the user chooses to select an asset from Bynder 
 
 ![Figure 3](../media/bynder-ui-select-asset.png)
 
-Figure 4: Illustrates that when the user has selected an asset from Bynder, a card will be displayed with the selected asset information which is:
+Figure 4: Illustrates that when the user has selected an asset from Bynder, a card will be displayed with the selected asset information which are:
 
-Name
-
-Image from Bynder
+- Name
+- Image from Bynder
 
 This illustration also shows that the data from Bynder is stored in the Amplience content form and available for front end renders (including Live, Preview and visualisation)
 
@@ -47,17 +46,12 @@ This illustration also shows that the data from Bynder is stored in the Amplienc
 
 Figure 5: Is an illustrative example of a card. The UI may change during development but it has the following capabilities:
 
-Name (with hover tooltip to display the full name if large)
-
-Image (if there is an image reference from Bynder it will be displayed)
-
-Action buttons (all have tooltips)
-
-View in Bynder: Launches directly to the back office in Bynder to view / edit the asset
-
-Swap: Enables the user to swap this asset with another asset from Bynder. This launches the Bynder Universal Compact view with the current selected asset. When selecting a new asset the old reference will be overwritten
-
-Remove asset: Deletes the asset from the Amplience content
+- Name (with hover tooltip to display the full name if large)
+- Image (if there is an image reference from Bynder it will be displayed)
+- Action buttons (all have tooltips)
+  - View in Bynder: Launches directly to the back office in Bynder to view / edit the asset
+  - Swap: Enables the user to swap this asset with another asset from Bynder. This launches the Bynder Universal Compact view with the current selected asset. When selecting a new asset the old reference will be overwritten
+  - Remove asset: Deletes the asset from the Amplience content
 
 ![Figure 5](../media/bynder-extension-field-actions.png)
 
