@@ -1,12 +1,8 @@
-# dc-extension-bynder
-
-TODO:
--- NEEDS TO BE CHECKED
-
+# Hosting
 
 ## Hosting the Bynder extension
 
-This document describes a straightforward method of forking and hosting the extension yourself using GitHub Pages. This is useful if you want full control over your target version and features - you can easily fork this repository and host your own version of the Bynder Extension with a few simple commands. Of course, the extension can be hosted on any static hosting service (e.g. Netlify, Amplify), this guide simply describes a simple way of doing this.
+This document describes a straightforward method of forking and hosting the extension yourself. This is useful if you want full control over your target version and features - you can easily fork this repository and host your own version of the Bynder Extension with a few simple commands. Of course, the extension can be hosted on any static hosting service (e.g. Netlify, Amplify), this guide simply describes a simple way of doing this.
 
 Alternatively, return to [README.md](../README.md) for more information on the extension.
 
@@ -22,27 +18,9 @@ To build the extension, you will first need to install the project with `npm ins
 
 If you want to run the extension itself locally, this can be done with `npm run start` .
 
-## Publishing GitHub Pages on your fork
+## Hosting the extension
 
-After you've built your version of the Bynder extension, you can publish it with the following command:
-
-`npx gh-pages -d build`
-
-Note: if you're on a remote, you'll want to publish with this command:
-
-`npx gh-pages -d build -o remote-name`
-
-This will create or update the `gh-pages` branch on your repository for you. You may be asked for GitHub authentication, depending on how you configured Git in the first place.
-
-### Setting up GitHub Pages for the first time
-
-After you've published the `gh-pages` branch, you'll want to enable GitHub Pages hosting on your repository. Head over to the "Settings" tab on your fork, then near the bottom of "Options" you'll see a "GitHub Pages" section. Make sure that you set the branch to `gh-pages`, and save to publish the site. 
-
-It may take some time for the site to actually publish, but when it does you should be shown a URL for your version of the Bynder extension.
-
-It will typically result in a URL like this: `https://<username>.github.io/dc-extension-bynder/index.html`
-
-You can use this URL directly as an extension from DC. You will only have to do this once - all future publishes should update the version at this URL automatically!
+If you choose to host the extension yourself it must be hosted on a HTTPS location. Your extension settings and URL should be updated to reflect your hosting location.
 
 ## Keeping your fork updated with remotes
 
@@ -65,3 +43,28 @@ If you're using your fork as a version snapshot of our repository and want to up
 If you've made your own changes to the extension, but want to pull in changes that we've made on the master branch or recently released, then you can also rebase your modified branch on top of our master branch. Simply make sure that your remote is configured, and run `git fetch <remote-name>`, followed by `git rebase <remote-name>/master`
 
 You may run into merge conflicts along the way if you've changed the same files as the source. If this happens, look at the files listed, resolve the conflicts, and continue with `git rebase --continue` until all of your commits have been applied.
+
+## Github Pages Specific notes
+
+### Publishing GitHub Pages on your fork
+
+After you've built your version of the Bynder extension, you can publish it with the following command:
+
+`npx gh-pages -d build`
+
+Note: if you're on a remote, you'll want to publish with this command:
+
+`npx gh-pages -d build -o remote-name`
+
+This will create or update the `gh-pages` branch on your repository for you. You may be asked for GitHub authentication, depending on how you configured Git in the first place.
+
+### Setting up GitHub Pages for the first time
+
+After you've published the `gh-pages` branch, you'll want to enable GitHub Pages hosting on your repository. Head over to the "Settings" tab on your fork, then near the bottom of "Options" you'll see a "GitHub Pages" section. Make sure that you set the branch to `gh-pages`, and save to publish the site. 
+
+It may take some time for the site to actually publish, but when it does you should be shown a URL for your version of the Bynder extension.
+
+It will typically result in a URL like this: `https://<username>.github.io/dc-extension-bynder/index.html`
+
+You can use this URL directly as an extension from DC. You will only have to do this once - all future publishes should update the version at this URL automatically!
+
