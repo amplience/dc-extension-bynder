@@ -16,7 +16,7 @@
 - [Documentation](#documentation)
 - [Out of scope](#out-of-scope)
 - [Feature requests](#feature-requests)
-- [Public listings  ](#public-listings)
+- [Public listings](#public-listings)
 
 ## Extension configuration
 
@@ -49,7 +49,7 @@ Options documented by Bynder at time of build of the extension are listed below 
 | defaultSearchTerm             | Set the initial value for search term                                                                                                                                          | "Keyword"                                                              | None                                    |
 | language                      | Set language for the Compact View                                                                                                                                              | "en_US", "nl_NL", "de_DE", "fr_FR", "es_ES"                            | "en_US"                                 |
 | mode                          | Set the Compact View to allow multiple or single asset selection                                                                                                               | "MultiSelect", "SingleSelect", "SingleSelectFile"                      | "SingleSelect"                          |
-| theme                         | A theme object for customizing Compact View look and feel                                                                                                                      |     Theme                                                              | None                                    |
+| theme                         | A theme object for customizing Compact View look and feel                                                                                                                      | Theme                                                                  | None                                    |
 | assetTypes                    | An array of strings for limiting allowed asset types                                                                                                                           | AssetType[]                                                            | ["image", "audio", "video", "document"] |
 | assetFieldSelection           | A multiline string containing desired asset fields (see below)                                                                                                                 | String                                                                 | All fields                              |
 | hideExternalAccess            | If true, removes access to external DAM from assets and collections                                                                                                            | true, false                                                            | false                                   |
@@ -70,24 +70,26 @@ This should be supplied in the following format:
 
 ```json
 {
-  "bynderConfig":{
+  "bynderConfig": {
     // Bynder configuration properties
   },
-  "amplienceConfig":{
+  "amplienceConfig": {
     // Amplience configuration properties
   }
 }
 ```
+
 Further information about settings for these properties is listed below.
 
 ### Bynder Configuration (bynderConfig)
 
 #### General
+
 You can use any of the attributes from Bynder to customise your extension to your account. Below is an example of these settings:
 
 ```json
 {
-  "bynderConfig":{
+  "bynderConfig": {
     "portal": {
       "url": "{{YOUR_BYNDER_PORTAL_URL}}",
       "readOnly": true,
@@ -95,7 +97,7 @@ You can use any of the attributes from Bynder to customise your extension to you
     },
     "mode": "SingleSelect",
     "language": "fr_FR",
-    "defaultSearchTerm" : "Logo",
+    "defaultSearchTerm": "Logo",
     "assetTypes": ["image"],
     "modalStyles": {
       "width": "100%"
@@ -116,13 +118,14 @@ You can use any of the attributes from Bynder to customise your extension to you
       "token": "{{YOUR_BYNDER_ACCESS TOKEN}}"
     }
   },
-  "amplienceConfig":{
+  "amplienceConfig": {
     // Amplience configuration properties
   }
 }
 ```
 
 #### Using a Bynder Access token
+
 If you wish for all users in the Amplience Dynamic Content CMS to be able to browse and select assets **without** having to login, you can provide a Bynder Access token in your extension settings.
 
 > Note: It is also recommended that you provide your portal URL.
@@ -131,7 +134,7 @@ The example below has just these settings with `{{PLACEHOLDER}}`` content for yo
 
 ```json
 {
-  "bynderConfig":{
+  "bynderConfig": {
     "portal": {
       "url": "{{YOUR_BYNDER_PORTAL_URL}}"
     },
@@ -140,7 +143,7 @@ The example below has just these settings with `{{PLACEHOLDER}}`` content for yo
       "token": "{{YOUR_BYNDER_ACCESS TOKEN}}"
     }
   },
-  "amplienceConfig":{
+  "amplienceConfig": {
     // Amplience configuration properties
   }
 }
@@ -148,8 +151,70 @@ The example below has just these settings with `{{PLACEHOLDER}}`` content for yo
 
 ### Amplience Configuration (amplienceConfig)
 
-TODO: Content Mapping
+#### Content Mapping
 
+By default, all Bynder asset data is stored in the same data structure provided by Bynder. If you require more control over how asset data from Bynder is stored in your Dynamic Content content item, you can configure the extension with content mapping. This allows you to define a new data structure using json path.
+
+Content mapping can be setup using the `contentMapping` configuration option e.g.
+
+```
+"amplienceConfig": {
+    "contentMapping": {
+      "title": {
+        "jsonPath": "$.name"
+      },
+      "mediaId": {
+        "jsonPath": "$.databaseId"
+      }
+    }
+  }
+```
+
+When using `contentMapping` to define a new data structure we also include a number of required properties, in addition to the defined content mappings:
+
+- `name`
+- `databaseId`
+- `files`
+- `url`
+- `additionalInfo`
+
+With `contentMapping` defined like the example above you will get the following output (including required fields):
+
+```
+{
+  "content": {
+    "bynder": {
+      "title": "pencils",  // <- mapped property
+      "mediaId": "819F230B-B9AF-46C6-9404D80CAC9C5E3C",  // <- mapped property
+      "url": "https://wave-trial.getbynder.com/media/?mediaId=819F230B-B9AF-46C6-9404D80CAC9C5E3C",
+      "name": "pencils",
+      "files": {
+        "original": {
+          "url": "https://wave-trial.getbynder.com/m/c123456789b83af/original/pencils.JPG",
+          "width": 3024,
+          "height": 4032,
+          "fileSize": 1755462
+        },
+        ...
+      },
+      "databaseId": "819F230B-B9AF-46C6-9404D80CAC9C5E3C",
+      "additionalInfo": {
+        "selectedFile": {
+          "url": "https://wave-trial.getbynder.com/m/c123456789b83af/original/pencils.JPG",
+          "width": 3024,
+          "height": 4032,
+          "fileSize": 1755462
+        }
+      }
+    },
+    "_meta": {
+      "name": "Bynder Asset 1",
+      "schema": "https://amplience.com/example/schema/bynder/asset.json",
+      "deliveryId": "16da7260-1dcd-4933-a6e7-6a0b1c973ff9"
+    }
+  }
+}
+```
 
 ## Schema Configuration
 
