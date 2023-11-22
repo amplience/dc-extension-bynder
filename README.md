@@ -61,24 +61,7 @@ Here is a sample installation parameters payload:
     "assetTypes": ["image"],
     "mode": "SingleSelect"
   },
-  "amplienceConfig": {
-    "contentMapping": {
-      "title": {
-        "jsonPath": "$.name"
-      },
-      "mediaId": {
-        "jsonPath": "$.databaseId"
-      },
-      "url": {
-        "jsonPath": "$.url"
-      }
-    },
-    "cardImages" : [
-      "small",
-      "medium",
-      "mini"
-    ]
-  }
+  "amplienceConfig": {}
   
 }
 ```
