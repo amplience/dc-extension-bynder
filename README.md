@@ -62,7 +62,6 @@ Here is a sample installation parameters payload:
     "mode": "SingleSelect"
   },
   "amplienceConfig": {}
-  
 }
 ```
 
