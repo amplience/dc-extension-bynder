@@ -1,6 +1,6 @@
 {
   "name": "dc-extension-bynder",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@datadog/browser-rum": "^4.45.0",
