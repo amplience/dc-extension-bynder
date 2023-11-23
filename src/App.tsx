@@ -15,7 +15,7 @@ function App() {
         clientToken: ddToken,
         env: ddEnv,
         site: "datadoghq.com",
-        service: "dc-extension-ai-image-generator",
+        service: "dc-extension-bynder",
         version,
         trackResources: true,
         trackLongTasks: true,

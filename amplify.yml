@@ -3,9 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 16
-        - nvm use 16
-        - npm install --legacy-peer-deps
+        - nvm install 18.13
+        - nvm use 18.13
+        - npm ci
     build:
       commands:
         - CI=false npm run build

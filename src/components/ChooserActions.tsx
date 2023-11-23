@@ -5,7 +5,7 @@ export type ChooserActionsProps = PropsWithChildren<{
   populated?: boolean;
 }>;
 
-const Root = styled("div")(({ populated }: any) => ({
+const Root = styled("div")(() => ({
   transition: "all .3s",
   position: "absolute" as "absolute",
   top: 0,
@@ -14,39 +14,23 @@ const Root = styled("div")(({ populated }: any) => ({
   right: 0,
 
   display: "flex",
-  "flex-direction": "row",
-  "align-items": "center",
-  "align-content": "center",
-  "justify-content": "center",
+  flexDirection: "row",
+  alignItems: "center",
+  alignContent: "center",
+  justifyContent: "center",
 
-  ...(populated
-    ? {
-        fill: "#fff",
-        "&:hover": {
-          "background-color": "rgba(41,51,63,.8)",
-          "& .MuiFab-root": {
-            opacity: 1,
-          },
-        },
-        "& .MuiFab-root": {
-          opacity: 0,
-          color: "#fff",
-          backgroundColor: "#ccc",
-        },
-      }
-    : {
-        "background-color": "#e5e5e5",
-        fill: "#e5e5e5",
-
-        "&:hover": {
-          "background-color": "#c9cccf",
-          fill: "#c9cccf",
-        },
-
-        "& .MuiFab-root": {
-          backgroundColor: "#fff",
-        },
-      }),
+  fill: "#fff",
+  "&:hover": {
+    backgroundColor: "rgba(41,51,63,.8)",
+    "& .MuiFab-root": {
+      opacity: 1,
+    },
+  },
+  "& .MuiFab-root": {
+    opacity: 0,
+    color: "#fff",
+    backgroundColor: "#ccc",
+  },
 
   "&:hover $content": {
     display: "inherit",
