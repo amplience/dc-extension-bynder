@@ -2,7 +2,7 @@
   "name": "bynder-multi",
   "label": "Bynder Multi",
   "description": "Sample extension configuration for multi select",
-  "url": "https://bynder.extensions.content.amplience-qa.net",
+  "url": "https://bynder.extensions.content.amplience.net",
   "height": 200,
   "enabledForAllContentTypes": false,
   "category": "CONTENT_FIELD",
